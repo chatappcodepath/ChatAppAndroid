@@ -14,9 +14,9 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.google.firebase.codelab.friendlychat.R;
-import com.google.firebase.codelab.friendlychat.adapters.TrailerGridAdapter;
-import com.google.firebase.codelab.friendlychat.models.Movie;
-import com.google.firebase.codelab.friendlychat.models.Trailer;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter.TrailerGridAdapter;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Trailer;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 

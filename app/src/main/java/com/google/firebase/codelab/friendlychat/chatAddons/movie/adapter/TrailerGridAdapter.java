@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat.adapters;
+package com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.codelab.friendlychat.R;
-import com.google.firebase.codelab.friendlychat.models.Movie;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
 
 import java.util.ArrayList;
 

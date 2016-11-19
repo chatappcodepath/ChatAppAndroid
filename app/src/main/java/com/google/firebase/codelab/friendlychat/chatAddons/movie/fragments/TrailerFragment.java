@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat.fragments;
+package com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
