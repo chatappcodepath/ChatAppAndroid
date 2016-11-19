@@ -58,9 +58,9 @@ public class TrailerGridAdapter extends ArrayAdapter<Movie> {
         }
 
         Movie item = mGridData.get(position);
-        holder.titleTextView.setText(item.getOriginalTitle());
+        holder.titleTextView.setText(item.getTitle());
 
-        Glide.with(this.getContext()).load(item.getPosterPath()).into(holder.imageView);
+        Glide.with(this.getContext()).load(item.getPoster_path()).into(holder.imageView);
         return row;
     }
 

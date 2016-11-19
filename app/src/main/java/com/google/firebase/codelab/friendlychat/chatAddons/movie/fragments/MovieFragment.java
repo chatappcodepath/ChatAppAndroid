@@ -4,30 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import com.google.firebase.codelab.friendlychat.R;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.MovieNetworkClient;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter.TrailerGridAdapter;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
-import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Trailer;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
-
-import static android.app.Activity.RESULT_OK;
+import java.util.Arrays;
 
 
 /**
@@ -134,101 +123,22 @@ public class MovieFragment extends Fragment {
         getMovieDetails();
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
                 Movie movie = (Movie) parent.getItemAtPosition(position);
-                if (movie != null) {
-                    getTrailerUrl(movie.getMovieId(), movie.getPosterPath());
-                }
-
-//        mTrailerProgressBar.setVisibility(View.VISIBLE);
             }
         });
-        getMovieDetails();
-
     }
-
-    private void getTrailerUrl(int movieId, final String posterPath) {
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        String url = ("https://api.themoviedb.org/3/movie/" + movieId + "/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US");
-        client.get(url, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // Root JSON in response is an dictionary i.e { "data : [ ... ] }
-                // Handle resulting parsed JSON response here
-                try {
-
-                    JSONArray trailorJson = response.getJSONArray("results");
-                    Intent intent = new Intent();
-                    if (trailorJson != null && trailorJson.length() > 0) {
-                        ArrayList<Trailer> trailors = Trailer.fromJsonArray(trailorJson);
-                        // Here we now have the json array of businesses!
-                        Log.d("DEBUG", trailorJson.toString());
-                        intent.putExtra("trailerUrl", String.valueOf(trailors.get(0).getUrl()));
-                        intent.putExtra("site", String.valueOf(trailors.get(0).getSite()));
-                        intent.putExtra("posterPath", posterPath);
-                        mListener.onFragmentInteraction(0,RESULT_OK,intent); // set result code and bundle data for response
-
-                    } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "Trailer not available", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                Toast.makeText(getActivity(), "FAIL", Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-
 
     private void getMovieDetails() {
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(MOVIE_URL, new JsonHttpResponseHandler() {
+        MovieNetworkClient.getInstance().getMovies(new MovieNetworkClient.MovieResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                // Root JSON in response is an dictionary i.e { "data : [ ... ] }
-                // Handle resulting parsed JSON response here
-                try {
-                    JSONArray movieJson = response.getJSONArray("results");
-                    mGridData = Movie.fromJsonArray(movieJson);
-                    // Here we now have the json array of businesses!
-                    Log.d("DEBUG", movieJson.toString());
-                    mGridData.clear();
-                    mGridData.addAll(Movie.fromJsonArray(movieJson)); // add new items
-                    mTrailerGridAdapter.setmGridData(mGridData);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String res, Throwable t) {
-                // called when response HTTP status is "4XX" (eg. 401, 403, 404)
-                Toast.makeText(getActivity(), "FAIL", Toast.LENGTH_LONG).show();
+            public void fetchedMovies(Movie[] movies) {
+                mGridData = new ArrayList<Movie>(Arrays.asList(movies));
+                mTrailerGridAdapter.setmGridData(mGridData);
+                mTrailerGridAdapter.notifyDataSetChanged();
             }
         });
-
-
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(int requestCode,int resultCode,Intent intent);
