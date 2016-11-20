@@ -20,7 +20,7 @@ public class Movie {
     String overview;
     String id;
     Double vote_average;
-    String trailerID;
+    String trailerURL;
 
     public String getOverview() {
         return overview;
@@ -28,10 +28,6 @@ public class Movie {
 
     public String getId() {
         return id;
-    }
-
-    public String getTrailerPath() {
-        return  String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed", id);
     }
 
     public String getPoster_path() {
@@ -52,14 +48,23 @@ public class Movie {
 
     public void fetchTrailerURL(final MovieNetworkClient.TrailerResponseHandler trailerResponseHandler) {
         final Movie movie = this;
+        String trailerPath = String.format("https://api.themoviedb.org/3/movie/%s/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed", id);
 
-        MovieNetworkClient.getInstance().getTrailers(this, new MovieNetworkClient.TrailerResponseHandler() {
+        MovieNetworkClient.getInstance().getTrailers(trailerPath, new MovieNetworkClient.TrailerResponseHandler() {
             @Override
             public void fetchedTrailers(Trailer[] trailers) {
-                movie.trailerID = trailers[0].getId();
+                movie.trailerURL = trailers[0].getUrl();
                 trailerResponseHandler.fetchedTrailers(trailers);
             }
         });
+    }
+
+    public String getTrailerURL() {
+        return trailerURL;
+    }
+
+    public void setTrailerURL(String trailerURL) {
+        this.trailerURL = trailerURL;
     }
 
     public Movie(JSONObject jsonMovieData) throws JSONException {
@@ -89,5 +94,10 @@ public class Movie {
     public String getJSONString() {
         Gson gson = new GsonBuilder().create();
         return gson.toJson(this);
+    }
+
+    public static Movie getMovie(String jsonPayload) {
+        Gson gson = new GsonBuilder().create();
+        return gson.fromJson(jsonPayload, Movie.class);
     }
 }

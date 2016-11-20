@@ -23,7 +23,7 @@ import java.util.Date;
 public class FriendlyMessage {
 
     public enum MessageType {
-        Movie, Text, TicTacToe, BotText
+        Movie, Text, TicTacToe, BotText, Sentinel
     }
 
     private String name;

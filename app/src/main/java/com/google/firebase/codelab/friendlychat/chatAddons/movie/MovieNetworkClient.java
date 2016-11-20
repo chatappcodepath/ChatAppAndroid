@@ -3,6 +3,7 @@ package com.google.firebase.codelab.friendlychat.chatAddons.movie;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.MovieResponse;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Trailer;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.TrailerResponse;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -61,12 +62,12 @@ public class MovieNetworkClient {
         });
     }
 
-    public void getTrailers(Movie movie, final TrailerResponseHandler responseHandler) {
+    public void getTrailers(String trailerPath, final TrailerResponseHandler responseHandler) {
         if (!ChatApplication.isNetworkReachable()) {
             return;
         }
 
-        client.get(movie.getTrailerPath(), new TextHttpResponseHandler() {
+        client.get(trailerPath, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -74,8 +75,8 @@ public class MovieNetworkClient {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Trailer[] trailers = gson.fromJson(responseString, Trailer[].class);
-                responseHandler.fetchedTrailers(trailers);
+                TrailerResponse trailerResponse = gson.fromJson(responseString, TrailerResponse.class);
+                responseHandler.fetchedTrailers(trailerResponse.results);
             }
         });
     }

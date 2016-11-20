@@ -1,9 +1,9 @@
 package com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,9 @@ import com.google.firebase.codelab.friendlychat.R;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.MovieNetworkClient;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter.TrailerGridAdapter;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Trailer;
+import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
+import com.google.firebase.codelab.friendlychat.utilities.AddonsProtocols;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +25,7 @@ import java.util.Arrays;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MovieFragment.OnFragmentInteractionListener} interface
+ * {@link com.google.firebase.codelab.friendlychat.utilities.AddonsProtocols.AddonsListener} interface
  * to handle interaction events.
  * Use the {@link MovieFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -32,6 +35,7 @@ public class MovieFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = MovieFragment.class.getSimpleName();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -40,10 +44,8 @@ public class MovieFragment extends Fragment {
     private GridView mGridView;
     private TrailerGridAdapter mTrailerGridAdapter;
     private ArrayList<Movie> mGridData;
-    private final String MOVIE_URL = "https://api.themoviedb.org/3/movie/upcoming?" +
-            "api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed";
 
-    private OnFragmentInteractionListener mListener;
+    private AddonsProtocols.AddonsListener mListener;
 
     public MovieFragment() {
         // Required empty public constructor
@@ -91,8 +93,8 @@ public class MovieFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof AddonsProtocols.AddonsListener) {
+            mListener = (AddonsProtocols.AddonsListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -123,7 +125,19 @@ public class MovieFragment extends Fragment {
         getMovieDetails();
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Movie movie = (Movie) parent.getItemAtPosition(position);
+                final Movie movie = (Movie) parent.getItemAtPosition(position);
+                if (movie.getTrailerURL() != null) {
+                    mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie);
+                    return;
+                }
+                Log.d(TAG, "Fetching Movie Trailer");
+                movie.fetchTrailerURL(new MovieNetworkClient.TrailerResponseHandler() {
+                    @Override
+                    public void fetchedTrailers(Trailer[] trailers) {
+                        Log.d(TAG, "Movie Fetched");
+                        mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie);
+                    }
+                });
             }
         });
     }
@@ -137,10 +151,5 @@ public class MovieFragment extends Fragment {
                 mTrailerGridAdapter.notifyDataSetChanged();
             }
         });
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(int requestCode,int resultCode,Intent intent);
     }
 }
