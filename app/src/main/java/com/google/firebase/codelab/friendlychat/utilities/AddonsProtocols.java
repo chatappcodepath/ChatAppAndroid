@@ -9,6 +9,6 @@ import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
 public class AddonsProtocols {
     public interface AddonsListener {
         // TODO: Update argument type and name
-        void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType);
+        void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType, Boolean isBotMessage);
     }
 }

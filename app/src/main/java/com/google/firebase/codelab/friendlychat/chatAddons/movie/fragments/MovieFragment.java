@@ -127,7 +127,7 @@ public class MovieFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 final Movie movie = (Movie) parent.getItemAtPosition(position);
                 if (movie.getTrailerURL() != null) {
-                    mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie);
+                    mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
                     return;
                 }
                 Log.d(TAG, "Fetching Movie Trailer");
@@ -135,7 +135,7 @@ public class MovieFragment extends Fragment {
                     @Override
                     public void fetchedTrailers(Trailer[] trailers) {
                         Log.d(TAG, "Movie Fetched");
-                        mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie);
+                        mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
                     }
                 });
             }

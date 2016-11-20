@@ -66,7 +66,6 @@ public class TrailerGridAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public int getCount() {
-
         int count = mGridData.size();
         return count;
     }

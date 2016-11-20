@@ -211,7 +211,7 @@ public class IndividualChatActivity extends AppCompatActivity
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text);
+                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text, false);
                 mMessageEditText.setText("");
             }
         });
@@ -226,17 +226,18 @@ public class IndividualChatActivity extends AppCompatActivity
     public void sendAutoReplyForMessageAtIndex(int index) {
         if (lastIndex != null && lastIndex == index - 1 && shouldAutoReply) {
             FriendlyMessage message = mFirebaseAdapter.getItem(index);
-            if (!message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid())) {
+            if (!message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid()) &&
+                    !message.getIsBotMessage()) {
                 String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
-                sendMessageWithPayload(autoReplyText, FriendlyMessage.MessageType.BotText);
+                sendMessageWithPayload(autoReplyText, FriendlyMessage.MessageType.Text, true);
             }
         }
         lastIndex = index;
     }
 
     @Override
-    public void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType) {
-        FriendlyMessage newMessage = new FriendlyMessage(messagePayload, mUsername, mPhotoUrl, messageType);
+    public void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType, Boolean isBotMessage) {
+        FriendlyMessage newMessage = new FriendlyMessage(messagePayload, mUsername, mPhotoUrl, messageType, isBotMessage);
         ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
     }
 
