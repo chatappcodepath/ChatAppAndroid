@@ -27,7 +27,7 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
     static final String YT_API_KEY = "AIzaSyDBQycZ7fwrRNm2OBTd54X4k9wcwjNM5LE";
 
     ImageView messengerImageView;
-    ImageView ivTrailerLogo;
+    ImageView ivTrailerImage;
     TextView messengerTextView;
     ImageView ivOverlay;
     Context activityContext;
@@ -36,7 +36,7 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
     public MovieMessageViewHolder(View itemView, Context activityContext) {
         super(itemView, activityContext);
         messengerImageView = (ImageView) itemView.findViewById(R.id.messengerImageView);
-        ivTrailerLogo = (ImageView) itemView.findViewById(R.id.ivTrailerLogo);
+        ivTrailerImage = (ImageView) itemView.findViewById(R.id.ivTrailerImage);
         ivOverlay = (ImageView) itemView.findViewById(R.id.ivOverlay);
         messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
         this.activityContext = activityContext;
@@ -66,11 +66,10 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
                     .into(this.messengerImageView);
         }
 
-        this.ivTrailerLogo.setVisibility(View.VISIBLE);
-        this.ivOverlay.setVisibility(View.VISIBLE);
         Glide.with(activityContext)
-                .load(movie.getPoster_path()).fitCenter().centerCrop().
-                into(this.ivOverlay);
+                .load(movie.getPoster_path())
+                .fitCenter().centerCrop().
+                into(this.ivTrailerImage);
     }
 
     public static View createItemView(ViewGroup parent) {
