@@ -1,4 +1,6 @@
-package com.google.firebase.codelab.friendlychat.models;
+package com.google.firebase.codelab.friendlychat.chatAddons.movie.models;
+
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class Trailer implements Serializable{
 
     private String id;
+    @SerializedName("key")
     private String url;
     private String title;
 

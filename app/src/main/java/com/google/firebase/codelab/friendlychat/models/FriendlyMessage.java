@@ -23,7 +23,7 @@ import java.util.Date;
 public class FriendlyMessage {
 
     public enum MessageType {
-        Movie, Text, TicTacToe, BotText
+        Movie, Text, TicTacToe, Sentinel
     }
 
     private String name;
@@ -31,6 +31,7 @@ public class FriendlyMessage {
     private String sid;
     private MessageType msgType;
     private String payLoad;
+    private Boolean isBotMessage;
     private Long ts;
 
     /**
@@ -47,21 +48,13 @@ public class FriendlyMessage {
     public FriendlyMessage() {
     }
 
-    public FriendlyMessage(String text, String name, String photoUrl, MessageType msgType) {
+    public FriendlyMessage(String text, String name, String photoUrl, MessageType msgType, Boolean isBotMessage) {
         this.payLoad = text;
         this.name = name;
         this.photoUrl = photoUrl;
         this.sid = ChatApplication.getFirebaseClient().getmFirebaseUser().getUid();
         this.msgType = msgType;
-        this.ts = (new Date()).getTime();
-    }
-
-    public FriendlyMessage(String text, String name, String photoUrl) {
-        this.payLoad = text;
-        this.name = name;
-        this.photoUrl = photoUrl;
-        this.msgType = MessageType.Text;
-        this.sid = ChatApplication.getFirebaseClient().getmFirebaseUser().getUid();
+        this.isBotMessage = isBotMessage;
         this.ts = (new Date()).getTime();
     }
 
@@ -93,11 +86,6 @@ public class FriendlyMessage {
         return msgType.name();
     }
 
-    @Exclude
-    public MessageType getMsgTypeAsEnum() {
-        return msgType;
-    }
-
     public void setMsgType(String msgType) {
         this.msgType = MessageType.valueOf(msgType);
     }
@@ -108,5 +96,18 @@ public class FriendlyMessage {
 
     public void setTs(Long ts) {
         this.ts = ts;
+    }
+
+    public Boolean getIsBotMessage() {
+        return isBotMessage;
+    }
+
+    public void setIsBotMessage(Boolean botMessage) {
+        isBotMessage = botMessage;
+    }
+
+    @Exclude
+    public MessageType getMsgTypeAsEnum() {
+        return msgType;
     }
 }

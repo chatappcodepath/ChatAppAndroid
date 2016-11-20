@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.google.firebase.codelab.friendlychat.fragments.MovieFragment">
+    tools:context="com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.MovieFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/activity_trailer_grid_view"

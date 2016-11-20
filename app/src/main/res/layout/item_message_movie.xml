@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/messengerImageView"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="@dimen/standard_chat_image_size"
+        android:layout_height="@dimen/standard_chat_image_size"
+        android:src="@drawable/ic_account_circle_black_36dp" />
+
+    <ImageView
+        android:id="@+id/ivTrailerImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="200dp"
+        android:layout_toRightOf="@id/messengerImageView"
+        android:contentDescription="@string/trailerposter"
+        tools:src="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ivOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ivTrailerImage"
+        android:layout_alignBottom="@id/ivTrailerImage"
+        android:layout_gravity="center"
+        android:contentDescription="@string/overlay_image"
+        android:src="@android:drawable/ic_media_play"
+        android:tint="@color/colorPrimaryDark"
+        android:layout_toRightOf="@id/messengerImageView"
+        />
+
+
+    <TextView
+        android:id="@+id/messengerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:layout_toRightOf="@id/messengerImageView"
+        android:layout_below="@id/ivTrailerImage"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout>

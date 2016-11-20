@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat.adapters;
+package com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.codelab.friendlychat.R;
-import com.google.firebase.codelab.friendlychat.models.Movie;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
 
 import java.util.ArrayList;
 
@@ -58,15 +58,14 @@ public class TrailerGridAdapter extends ArrayAdapter<Movie> {
         }
 
         Movie item = mGridData.get(position);
-        holder.titleTextView.setText(item.getOriginalTitle());
+        holder.titleTextView.setText(item.getTitle());
 
-        Glide.with(this.getContext()).load(item.getPosterPath()).into(holder.imageView);
+        Glide.with(this.getContext()).load(item.getPoster_path()).into(holder.imageView);
         return row;
     }
 
     @Override
     public int getCount() {
-
         int count = mGridData.size();
         return count;
     }

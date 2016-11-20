@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,38 +35,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.codelab.friendlychat.R;
-import com.google.firebase.codelab.friendlychat.fragments.MovieFragment;
-import com.google.firebase.codelab.friendlychat.fragments.TrailerFragment;
+import com.google.firebase.codelab.friendlychat.adapters.MessageListAdapter;
+import com.google.firebase.codelab.friendlychat.chatAddons.MessageViewHolder;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.MovieFragment;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.TrailerFragment;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
+import com.google.firebase.codelab.friendlychat.utilities.AddonsProtocols;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 import com.google.firebase.codelab.friendlychat.utilities.CodelabPreferences;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.MESSAGES_FOR_GROUP_NODE;
 
 public class IndividualChatActivity extends AppCompatActivity
         implements GoogleApiClient.OnConnectionFailedListener,
-        MovieFragment.OnFragmentInteractionListener,TrailerFragment.PreviewIFragmentnteractionListener {
+        AddonsProtocols.AddonsListener,TrailerFragment.PreviewIFragmentnteractionListener {
 
     public static final String INTENT_GROUP_KEY = "groupKey";
     private static final String TAG = "IndividualChatActivity";
@@ -85,7 +81,6 @@ public class IndividualChatActivity extends AppCompatActivity
     private LinearLayoutManager mLinearLayoutManager;
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
-    private String trailerUrl;
     private Boolean shouldAutoReply;
     private Integer lastIndex;
     private LinearLayout linearLayout;
@@ -149,50 +144,14 @@ public class IndividualChatActivity extends AppCompatActivity
 
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage,
-                MessageViewHolder>(
-                FriendlyMessage.class,
-                R.layout.item_message,
-                MessageViewHolder.class,
-                mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(currentGroupID)) {
-
-            @Override
-            protected void populateViewHolder(final MessageViewHolder viewHolder,
-                                              FriendlyMessage friendlyMessage, int position) {
-                mProgressBar.setVisibility(ProgressBar.INVISIBLE);
-                viewHolder.messageTextView.setText(friendlyMessage.getPayLoad());
-                viewHolder.messengerTextView.setText(friendlyMessage.getName());
-                if (friendlyMessage.getPhotoUrl() == null) {
-                    viewHolder.messengerImageView
-                            .setImageDrawable(ContextCompat
-                                    .getDrawable(IndividualChatActivity.this,
-                                            R.drawable.ic_account_circle_black_36dp));
-                } else {
-                    Glide.with(IndividualChatActivity.this)
-                            .load(friendlyMessage.getPhotoUrl())
-                            .into(viewHolder.messengerImageView);
-                }
-//                Gson gson = new GsonBuilder().create();
-//                gson.toJson(null);
-//                gson.fromJson("", Object.class);
-
-
-                if (friendlyMessage.getPayLoad() != null && friendlyMessage.getMsgTypeAsEnum() == FriendlyMessage.MessageType.Movie) {
-                    viewHolder.trailerImageView.setVisibility(View.VISIBLE);
-                    viewHolder.overlayImageView.setVisibility(View.VISIBLE);
-                            Glide.with(IndividualChatActivity.this)
-                            .load(trailer_poster_url).fitCenter().centerCrop().
-                            into(viewHolder.trailerImageView);
-                    trailerUrl=friendlyMessage.getPayLoad();
-                }
-            }
-        };
+        mFirebaseAdapter = new MessageListAdapter(mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(currentGroupID), this);
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
 
         {
             @Override
             public void onItemRangeInserted(int positionStart, int itemCount) {
+                mProgressBar.setVisibility(View.INVISIBLE);
                 super.onItemRangeInserted(positionStart, itemCount);
                 sendAutoReplyForMessageAtIndex(positionStart);
                 int friendlyMessageCount = mFirebaseAdapter.getItemCount();
@@ -234,6 +193,7 @@ public class IndividualChatActivity extends AppCompatActivity
             public void afterTextChanged(Editable editable) {
             }
         });
+
         mMessageEditText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -251,16 +211,7 @@ public class IndividualChatActivity extends AppCompatActivity
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FriendlyMessage friendlyMessage = new
-                        FriendlyMessage(mMessageEditText.getText().toString(),
-                        mUsername,
-                        mPhotoUrl);
-                CancelPreview(view);
-                if (trailerUrl != null) {
-                    friendlyMessage = new FriendlyMessage(trailerUrl, mUsername, mPhotoUrl, FriendlyMessage.MessageType.Movie);
-                    trailerUrl = null;
-                }
-                ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID,friendlyMessage);
+                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text, false);
                 mMessageEditText.setText("");
             }
         });
@@ -271,72 +222,45 @@ public class IndividualChatActivity extends AppCompatActivity
     public void onPreviewFragmentInteraction() {
     }
 
-    public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        public TextView messageTextView;
-        public TextView messengerTextView;
-        public CircleImageView messengerImageView;
-        public ImageView trailerImageView;
-        public ImageView overlayImageView ;
-
-
-        public MessageViewHolder(View v) {
-            super(v);
-            messageTextView = (TextView) itemView.findViewById(R.id.messageTextView);
-            messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
-            messengerImageView = (CircleImageView) itemView.findViewById(R.id.messengerImageView);
-            //image view for movie trailer
-            trailerImageView = (ImageView) itemView.findViewById(R.id.ivTrailerLogo);
-            overlayImageView = (ImageView) itemView.findViewById(R.id.ivOverlay);
-        }
-    }
-
 
     public void sendAutoReplyForMessageAtIndex(int index) {
         if (lastIndex != null && lastIndex == index - 1 && shouldAutoReply) {
             FriendlyMessage message = mFirebaseAdapter.getItem(index);
-            if (!message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid())) {
+            if (!message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid()) &&
+                    !message.getIsBotMessage()) {
                 String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
-                FriendlyMessage newMessage = new FriendlyMessage(autoReplyText, mUsername, mPhotoUrl, FriendlyMessage.MessageType.BotText);
-                ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
+                sendMessageWithPayload(autoReplyText, FriendlyMessage.MessageType.Text, true);
             }
         }
         lastIndex = index;
     }
-    public static final String YT_API_KEY = "AIzaSyDBQycZ7fwrRNm2OBTd54X4k9wcwjNM5LE";
-    private String trailer_poster_url;
 
     @Override
-    public void onFragmentInteraction(int requestCode, int resultCode, Intent intent) {
-
-        if (resultCode == RESULT_OK && requestCode == 0) {
-            // Extract name value from result extras
-            trailerUrl = intent.getExtras().getString("trailerUrl");
-            trailer_poster_url = intent.getExtras().getString("posterPath");
-
-            mSendButton.setEnabled(true);
-            // Toast the name to display temporarily on screen
-            Toast.makeText(this, "Video Added", Toast.LENGTH_SHORT).show();
-
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-            ft.replace(R.id.flMovieFragmentPreview, TrailerFragment.newInstance(trailerUrl,trailer_poster_url),"preview");
-            ft.commit();
-            CancelTrailers(this.getCurrentFocus());
-
-        }
+    public void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType, Boolean isBotMessage) {
+        FriendlyMessage newMessage = new FriendlyMessage(messagePayload, mUsername, mPhotoUrl, messageType, isBotMessage);
+        ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
     }
 
 
-
-
-    public void onPlayVideo(View view) {
-
-        Toast.makeText(IndividualChatActivity.this, "Playing Video", Toast.LENGTH_SHORT).show();
-        Intent intent = YouTubeStandalonePlayer.createVideoIntent(
-                this, YT_API_KEY, trailerUrl,0,true,true);
-        startActivity(intent);
-
-    }
+    //
+//    public void onFragmentInteraction(int requestCode, int resultCode, Intent intent) {
+//
+//        if (resultCode == RESULT_OK && requestCode == 0) {
+//            // Extract name value from result extras
+//            trailerUrl = intent.getExtras().getString("trailerUrl");
+//            trailer_poster_url = intent.getExtras().getString("posterPath");
+//
+//            mSendButton.setEnabled(true);
+//            // Toast the name to display temporarily on screen
+//            Toast.makeText(this, "Video Added", Toast.LENGTH_SHORT).show();
+//
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//
+//            ft.replace(R.id.flMovieFragmentPreview, TrailerFragment.newInstance(trailerUrl,trailer_poster_url),"preview");
+//            ft.commit();
+//            CancelTrailers(this.getCurrentFocus());
+//        }
+//    }
 
     public void onAddTrailor(View view) {
         //reset linear layout
@@ -358,7 +282,6 @@ public class IndividualChatActivity extends AppCompatActivity
         ft.replace(R.id.flMovieFragment, new MovieFragment(),"movies");
 // Complete the changes added above
         ft.commit();
-
     }
 
     public void CancelTrailers(View view) {
@@ -392,9 +315,7 @@ public class IndividualChatActivity extends AppCompatActivity
         lpf.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         lpf.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         linearLayout_fragment.setLayoutParams(lpf);
-        }
-
-
+    }
 
     @Override
     public void onStart() {
@@ -451,6 +372,5 @@ public class IndividualChatActivity extends AppCompatActivity
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
         FirebaseCrash.report(new Exception("OnConnectionFailed: " + connectionResult));
     }
-
 
 }
