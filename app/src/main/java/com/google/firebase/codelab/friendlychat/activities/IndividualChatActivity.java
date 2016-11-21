@@ -359,6 +359,7 @@ public class IndividualChatActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.sign_out_menu:
+                ChatApplication.removeCurrentPushToken();
                 mFirebaseAuth.signOut();
                 Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                 mUsername = ANONYMOUS;

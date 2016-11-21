@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by patelkev on 11/10/16.
@@ -43,6 +44,8 @@ public class FirebaseClient {
     public static final String USERS_NODE = "users";
     public static final String GROUPS_FOR_USER_NODE = "groupsForUser";
     public static final String GROUPS_NODE= "groups";
+    public static final String NOTIFICATION_REQUEST_NODE = "notificationRequests";
+    public static final String PUSH_TOKENS_NODE = "pushTokens";
     public static final String MESSAGES_FOR_GROUP_NODE = "messagesForGroup";
     public String[] groupIdsForCurrentUser;
     public Boolean setupDone = false;
@@ -59,10 +62,12 @@ public class FirebaseClient {
                     // Not signed in, launch the Sign In activity
                     //startActivity(new Intent(IndividualChatActivity.this, SignInActivity.class));
                     //finish();
+                    ChatApplication.setCurrentUser(null);
                     setupDone = false;
                     return;
                 } else {
                     addFireBaseUserIfNeeded(mFirebaseUser);
+                    ChatApplication.setCurrentUser(mFirebaseUser);
                     fetchGroupIdsForCurrentUser();
                 }
             }
@@ -147,6 +152,17 @@ public class FirebaseClient {
         DatabaseReference groupReference = mFirebaseDatabaseReference.child(GROUPS_NODE).child(groupID);
         groupReference.child("lmSnippet").setValue(messageToSend.getPayLoad());
         groupReference.child("ts").setValue((new Date()).getTime());
+        sendNotificationForGroup(groupID, messageToSend);
+    }
+
+    public void sendNotificationForGroup(String groupID, FriendlyMessage message) {
+        DatabaseReference notificationReferenceNode = mFirebaseDatabaseReference.child(NOTIFICATION_REQUEST_NODE);
+        Map notification = new HashMap<>();
+        notification.put("groupID", groupID);
+        notification.put("payload", message.getPayLoad());
+        notification.put("senderID", getmFirebaseUser().getUid());
+        notification.put("title", getmFirebaseUser().getDisplayName());
+        notificationReferenceNode.push().setValue(notification);
     }
 
     public void createGroup(final List<User> users, final FetchGroupsInterface mFetchGroupsInterface) {
@@ -189,6 +205,23 @@ public class FirebaseClient {
                 mFetchGroupsInterface.fetchedGroups(retGroups);
             }
         });
+    }
+
+    public void removePushToken(String token) {
+        try {
+            DatabaseReference userTokenRef = mFirebaseDatabaseReference
+                    .child(PUSH_TOKENS_NODE)
+                    .child(mFirebaseUser.getUid())
+                    .child(token);
+            userTokenRef.removeValue();
+        } catch (Exception e) {
+            Log.d(TAG, "push Token doesn't exist");
+        }
+    }
+
+    public void addPushToken(String token) {
+        DatabaseReference userTokenRef = mFirebaseDatabaseReference.child(PUSH_TOKENS_NODE).child(mFirebaseUser.getUid());
+        userTokenRef.child(token).setValue(true);
     }
 
     public FirebaseAuth getmFirebaseAuth() {
