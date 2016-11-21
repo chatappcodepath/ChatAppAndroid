@@ -10,6 +10,6 @@ public class AddonsProtocols {
     public interface AddonsListener {
         // TODO: Update argument type and name
         void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType, Boolean isBotMessage);
-        void onMovieAdded();
+        void onSpecialMessageAdded();
     }
 }

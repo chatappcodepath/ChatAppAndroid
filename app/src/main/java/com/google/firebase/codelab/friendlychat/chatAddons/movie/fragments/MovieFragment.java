@@ -148,7 +148,7 @@ public class MovieFragment extends Fragment {
                             Log.d(TAG, "Movie Fetched");
                             Toast.makeText(getContext(),"Video Added",Toast.LENGTH_SHORT).show();
                             mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
-                            mListener.onMovieAdded();
+                            mListener.onSpecialMessageAdded();
                         }
                     }
                 });

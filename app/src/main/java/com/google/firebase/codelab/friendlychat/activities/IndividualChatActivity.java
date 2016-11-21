@@ -242,7 +242,7 @@ public class IndividualChatActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMovieAdded() {
+    public void onSpecialMessageAdded() {
         CancelTrailers(getCurrentFocus());
     }
 
