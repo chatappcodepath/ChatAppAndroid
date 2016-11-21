@@ -43,12 +43,12 @@ public class MovieNetworkClient {
         return LazyHolder.INSTANCE;
     }
 
-    public void getMovies(final MovieResponseHandler responseHandler) {
+    public void getMovies(int page,final MovieResponseHandler responseHandler) {
         if (!ChatApplication.isNetworkReachable()) {
             return;
         }
 
-        client.get(GETMOVIES_URL, new TextHttpResponseHandler() {
+        client.get(GETMOVIES_URL+"&page="+page, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 

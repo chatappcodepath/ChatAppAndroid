@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.google.firebase.codelab.friendlychat.R;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.MovieNetworkClient;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter.TrailerGridAdapter;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.listeners.EndlessScrollListener.EndlessScrollListener;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Trailer;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
@@ -83,7 +85,10 @@ public class MovieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
+
+        displayListView(view);
+        return view;
 
     }
 
@@ -95,6 +100,7 @@ public class MovieFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof AddonsProtocols.AddonsListener) {
             mListener = (AddonsProtocols.AddonsListener) context;
+
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -111,18 +117,18 @@ public class MovieFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
        
-        displayListView();
+
 
     }
 
-    private void displayListView() {
+    private void displayListView(View view) {
 
-        mGridView = (GridView) getView().findViewById(R.id.gvTrailor);
+        mGridView = (GridView) view.findViewById(R.id.gvTrailor);
         mGridData = new ArrayList<>();
         mTrailerGridAdapter = new TrailerGridAdapter(getActivity(), R.layout.trailer_poster_item, mGridData);
 
         mGridView.setAdapter(mTrailerGridAdapter);
-        getMovieDetails();
+        getMovieDetails(1);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 final Movie movie = (Movie) parent.getItemAtPosition(position);
@@ -134,22 +140,49 @@ public class MovieFragment extends Fragment {
                 movie.fetchTrailerURL(new MovieNetworkClient.TrailerResponseHandler() {
                     @Override
                     public void fetchedTrailers(Trailer[] trailers) {
-                        Log.d(TAG, "Movie Fetched");
-                        mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
+                        if(trailers==null||trailers.length==0)
+                        {
+                            Toast.makeText(getContext(),"Trailer not available",Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Log.d(TAG, "Movie Fetched");
+                            Toast.makeText(getContext(),"Video Added",Toast.LENGTH_SHORT).show();
+                            mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
+                            mListener.onSpecialMessageAdded();
+                        }
                     }
                 });
             }
         });
+        mGridView.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            protected boolean onLoadMore(int page, int totalItemsCount) {
+                loadMoreDataFromApi(page);
+                return true;
+            }
+        });
+
     }
 
-    private void getMovieDetails() {
-        MovieNetworkClient.getInstance().getMovies(new MovieNetworkClient.MovieResponseHandler() {
+    private void loadMoreDataFromApi(int page) {
+
+        getMovieDetails(page);
+    }
+
+    private void getMovieDetails(final int page) {
+        MovieNetworkClient.getInstance().getMovies(page,new MovieNetworkClient.MovieResponseHandler() {
             @Override
             public void fetchedMovies(Movie[] movies) {
-                mGridData = new ArrayList<Movie>(Arrays.asList(movies));
+                if(mGridData==null){
+                    mGridData=new ArrayList<Movie>();
+                }
+                mGridData.addAll(new ArrayList<Movie>(Arrays.asList(movies)));
                 mTrailerGridAdapter.setmGridData(mGridData);
                 mTrailerGridAdapter.notifyDataSetChanged();
             }
         });
+
     }
+
+
 }

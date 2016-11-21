@@ -241,6 +241,11 @@ public class IndividualChatActivity extends AppCompatActivity
         ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
     }
 
+    @Override
+    public void onSpecialMessageAdded() {
+        CancelTrailers(getCurrentFocus());
+    }
+
 
     //
 //    public void onFragmentInteraction(int requestCode, int resultCode, Intent intent) {
@@ -372,5 +377,6 @@ public class IndividualChatActivity extends AppCompatActivity
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
         FirebaseCrash.report(new Exception("OnConnectionFailed: " + connectionResult));
     }
+
 
 }

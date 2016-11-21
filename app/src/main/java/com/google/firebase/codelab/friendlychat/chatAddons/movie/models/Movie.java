@@ -53,8 +53,14 @@ public class Movie {
         MovieNetworkClient.getInstance().getTrailers(trailerPath, new MovieNetworkClient.TrailerResponseHandler() {
             @Override
             public void fetchedTrailers(Trailer[] trailers) {
-                movie.trailerURL = trailers[0].getUrl();
-                trailerResponseHandler.fetchedTrailers(trailers);
+                if(trailers==null || trailers.length==0){
+                    movie.trailerURL=null;
+                    trailerResponseHandler.fetchedTrailers(trailers);
+                }
+                else {
+                    movie.trailerURL = trailers[0].getUrl();
+                    trailerResponseHandler.fetchedTrailers(trailers);
+                }
             }
         });
     }

@@ -35,7 +35,7 @@ public class TrailerGridViewActivity extends AppCompatActivity {
         mTrailerGridAdapter = new TrailerGridAdapter(this, R.layout.trailer_poster_item, mGridData);
 
         mGridView.setAdapter(mTrailerGridAdapter);
-        getMovieDetails();
+        getMovieDetails(1);
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
@@ -48,8 +48,8 @@ public class TrailerGridViewActivity extends AppCompatActivity {
     }
 
 
-    private void getMovieDetails() {
-        MovieNetworkClient.getInstance().getMovies(new MovieNetworkClient.MovieResponseHandler() {
+    private void getMovieDetails(int page) {
+        MovieNetworkClient.getInstance().getMovies(page,new MovieNetworkClient.MovieResponseHandler() {
             @Override
             public void fetchedMovies(Movie[] movies) {
                 mGridData = (ArrayList<Movie>) Arrays.asList(movies);
