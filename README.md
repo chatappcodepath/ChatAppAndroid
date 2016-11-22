@@ -44,8 +44,12 @@ The following **optional** features are implemented:
     * [ ] Expense sharing.
     * [ ] Presentations over Chat.
     
-Video Previews:
+Video Previews:All Gifs are included with Repository and at below path:
 
+1)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_SignIn.gif
+2)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_Movie.gif
+3)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_Eliza.gif
+4)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_PushNotif.gif
 
 
 ## References
