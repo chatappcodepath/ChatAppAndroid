@@ -37,6 +37,7 @@ public class Group {
         for (int i = 0; i < users.size(); i++) {
             user = users.get(i);
             this.usersImgs.put(user.getId(), user.photoUrl);
+
             this.title += user.getName();
         }
         this.id = id;

@@ -27,10 +27,6 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,11 +34,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,8 +55,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.MESSAGES_FOR_GROUP_NODE;
 
 public class IndividualChatActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener,
-        AddonsProtocols.AddonsListener,TrailerFragment.PreviewIFragmentnteractionListener {
+        implements AddonsProtocols.AddonsListener,TrailerFragment.PreviewIFragmentnteractionListener {
 
     public static final String INTENT_GROUP_KEY = "groupKey";
     private static final String TAG = "IndividualChatActivity";
@@ -98,7 +90,7 @@ public class IndividualChatActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_individual_chat);
         //view initialisation for movie fragment
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         linearLayout_fragment = (LinearLayout) findViewById(R.id.llFragment);
@@ -129,11 +121,6 @@ public class IndividualChatActivity extends AppCompatActivity
                 }
             }
         };
-
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API)
-                .build();
 
         // Initialize ProgressBar and RecyclerView.
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -345,38 +332,6 @@ public class IndividualChatActivity extends AppCompatActivity
     @Override
     public void onDestroy() {
         super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        FirebaseCrash.log("OnCreateOptionsMenu");
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.sign_out_menu:
-                ChatApplication.removeCurrentPushToken();
-                mFirebaseAuth.signOut();
-                Auth.GoogleSignInApi.signOut(mGoogleApiClient);
-                mUsername = ANONYMOUS;
-                startActivity(new Intent(this, SignInActivity.class));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
-        FirebaseCrash.report(new Exception("OnConnectionFailed: " + connectionResult));
     }
 
 

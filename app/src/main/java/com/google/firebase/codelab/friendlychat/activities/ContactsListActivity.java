@@ -7,9 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -48,6 +50,10 @@ public class ContactsListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        TextView mTitle = (TextView)findViewById(R.id.toolbar_title);
+        mTitle.setText("");
+
         FirebaseCrash.log("OnCreateMethod");
         final Context mContext = getApplicationContext();
 

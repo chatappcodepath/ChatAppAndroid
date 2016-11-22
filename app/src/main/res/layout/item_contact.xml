@@ -2,35 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/border_margin"
     tools:targetApi="ice_cream_sandwich">
 
     <ImageView
+        android:id="@+id/ivProfileImageContacts"
         android:layout_width="@dimen/standard_contact_image_size"
         android:layout_height="@dimen/standard_contact_image_size"
-        app:srcCompat="@drawable/ic_account_circle_black_36dp"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:id="@+id/ivProfileImageContacts" />
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/border_margin"
+        app:srcCompat="@drawable/ic_account_circle_black_36dp" />
 
     <TextView
-        tools:text="Firstname Lastname"
+        android:id="@+id/tvNameContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/ivProfileImageContacts"
-        android:paddingTop="@dimen/border_margin"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tvNameContacts" />
+        android:layout_toRightOf="@id/ivProfileImageContacts"
+        android:paddingTop="@dimen/border_margin"
+        tools:text="@string/firstlastname" />
 
     <TextView
-        tools:text="Email"
+        android:id="@+id/tvEmailContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvNameContacts"
-        android:layout_toRightOf="@id/ivProfileImageContacts"
         android:layout_toEndOf="@id/ivProfileImageContacts"
-        android:id="@+id/tvEmailContacts" />
+        android:layout_toRightOf="@id/ivProfileImageContacts"
+        tools:text="@string/email" />
 </RelativeLayout>
