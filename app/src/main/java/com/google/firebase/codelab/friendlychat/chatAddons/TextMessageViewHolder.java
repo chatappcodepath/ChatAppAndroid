@@ -39,7 +39,7 @@ public class TextMessageViewHolder extends MessageViewHolder {
             this.messengerImageView
                     .setImageDrawable(ContextCompat
                             .getDrawable(activityContext,
-                                    R.drawable.ic_account_circle_black_36dp));
+                                    R.drawable.ic_vector_account));
         } else {
             Glide.with(activityContext)
                     .load(friendlyMessage.getPhotoUrl())

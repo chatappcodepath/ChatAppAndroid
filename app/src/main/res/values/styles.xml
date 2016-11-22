@@ -1,19 +1,147 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
+        <item name="actionMenuTextColor">@android:color/white</item>
+        <!-- Tints the input fields like checkboxes and text fields -->
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <!-- Applies to views in their normal state. -->
+        <item name="colorControlNormal">@color/colorPrimaryDark</item>
+        <!-- Applies to views in their activated state (i.e checked or switches) -->
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <!-- Applied to framework control highlights (i.e ripples or list selectors) -->
+        <item name="colorControlHighlight">@color/colorAccent</item>
 
-        <item name="android:colorButtonNormal">@drawable/button_selector</item>
-        <item name="colorButtonNormal">@drawable/button_selector</item>
-        <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>
+        <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
+
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
+
+    </style>
+
+    <style name="general_background">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="header_background">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="toolbar_background">
+        <item name="android:background">?attr/myColorPrimary</item>
+    </style>
+
+    <style name="tv_toolbar">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textsize_header</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="tv_sign_in">
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">@dimen/tv_signin_margin</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textsize_large</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="tv_contacts">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textsize_header</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_trailer">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/textsize_regular</item>
+    </style>
+
+    <style name="tv_poster_item">
+        <item name="android:textSize">@dimen/textsize_small</item>
+        <item name="android:layout_marginTop">@dimen/small_spacing</item>
+        <item name="android:ellipsize">marquee</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <!-- <style name="fab_sign_in">
+        <item name="app:backgroundTint" tools:targetApi="lollipop">@color/colorPrimary</item>
+    </style> -->
+
+    <style name="ib_back_contacts">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ib_create_contacts">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="ib_trailer1">
+        <item name="android:layout_alignParentEnd">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">@dimen/border_margin</item>
+        <item name="android:contentDescription">@string/cancel</item>
+        <item name="android:onClick">CancelTrailers</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ib_trailer2">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_marginEnd">@dimen/border_margin</item>
+        <item name="android:layout_marginTop">@dimen/border_margin</item>
+    </style>
+
+
+    <style name="ib_cancel_trailer">
+        <item name="android:tint">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginEnd">@dimen/overlay_top_margin</item>
+        <item name="android:layout_alignParentTop">true</item>
     </style>
 
     <style name="FriendlyButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@color/colorTitle</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
+    <style name="gridview_style">
+        <item name="android:layout_margin">@dimen/small_spacing</item>
+        <item name="android:clickable">true</item>
+        <item name="android:columnWidth">@dimen/standard_poster_image_size</item>
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:numColumns">auto_fit</item>
+        <item name="android:stretchMode">columnWidth</item>
+        <item name="android:verticalSpacing">@dimen/small_spacing</item>
+    </style>
+
+    <style name="iv_overlay_trailer">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:tint">@color/colorPrimaryDark</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">@dimen/overlay_top_margin</item>
+    </style>
+
+    <style name="text_name">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/textsize_regular</item>
+    </style>
+
+    <style name="text_email">
+        <item name="android:textSize">@dimen/textsize_small</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="text_regular">
+        <item name="android:textSize">@dimen/textsize_regular</item>
     </style>
 </resources>

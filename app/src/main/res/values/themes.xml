@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Check the "res/values/attrs.xml" file for where these style names are first defined.  -->
+    <style name="Theme.CHATAPP_THEME" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="myColorPrimary">@color/colorPrimary</item>
+        <item name="myColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="myColorAccent">@color/colorAccent</item>
+
+        <item name="android:colorButtonNormal" tools:targetApi="lollipop">@drawable/button_selector</item>
+        <item name="colorButtonNormal">@drawable/button_selector</item>
+        <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>
+
+        <item name="mainBackground">@style/general_background</item>
+        <item name="headerBackground">@style/header_background</item>
+        <item name="toolbarBackground">@style/toolbar_background</item>
+
+        <item name="textName">@style/text_name</item>
+        <item name="textEmail">@style/text_email</item>
+        <item name="textRegular">@style/text_regular</item>
+
+        <item name="tvToolbar">@style/tv_toolbar</item>
+        <item name="tvSignin">@style/tv_sign_in</item>
+        <item name="ibBack">@style/ib_back_contacts</item>
+        <item name="ibCreate">@style/ib_create_contacts</item>
+        <item name="tvContacts">@style/tv_contacts</item>
+        <item name="ibTrailer1">@style/ib_trailer1</item>
+        <item name="ibTrailer2">@style/ib_trailer2</item>
+        <item name="tvTrailer">@style/tv_trailer</item>
+        <item name="tvPoster">@style/tv_poster_item</item>
+        <item name="gridViewStyling">@style/gridview_style</item>
+        <item name="ivOverlay">@style/iv_overlay_trailer</item>
+        <item name="ibCancelTrailer">@style/ib_cancel_trailer</item>
+    </style>
+
+</resources>

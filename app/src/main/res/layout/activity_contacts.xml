@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:id="@+id/llToolbarContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingTop="@dimen/activity_horizontal_margin"
-        android:weightSum="6"
-        android:orientation="horizontal">
+        android:weightSum="6">
 
         <ImageButton
             android:id="@+id/ibBackContacts"
+            style="@style/ib_back_contacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_back"/>
+            android:src="@drawable/ic_vector_back_button" />
 
         <TextView
             android:id="@+id/tvContacts"
+            style="@style/tv_contacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="#FFA500"
             android:layout_weight="4"
-            android:text="@string/contacts"/>
+            android:text="@string/contacts" />
 
 
         <ImageButton
             android:id="@+id/ibCreateContacts"
+            style="@style/ib_create_contacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_action_create"/>
+            android:src="@drawable/ic_vector_create_button" />
 
     </LinearLayout>
 
@@ -45,15 +48,15 @@
         android:id="@+id/svContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        app:queryHint="Name"
-        android:layout_below="@id/llToolbarContacts" />
+        android:layout_below="@id/llToolbarContacts"
+        android:padding="@dimen/border_margin"
+        app:queryHint="@string/search_hint" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvContacts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/svContacts"/>
+        android:layout_below="@id/svContacts" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -61,6 +64,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

@@ -11,44 +11,36 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp">
+
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            app:srcCompat="@mipmap/ic_launcher"
-            android:contentDescription="preview image"
             android:id="@+id/ivPreview"
+            android:layout_width="@dimen/standard_movie_preview_size"
+            android:layout_height="@dimen/standard_movie_preview_size"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:contentDescription="preview image"
+            app:srcCompat="@mipmap/ic_launcher" />
 
         <ImageView
             android:id="@+id/ivOverlay1"
+            style="@style/iv_overlay_trailer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/overlay_image"
-            android:src="@android:drawable/ic_media_play"
-            android:tint="@color/colorPrimaryDark"
-            android:visibility="invisible"
             android:layout_below="@+id/ibCancelTrailer"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="33dp" />
+            android:contentDescription="@string/overlay_image"
+            android:src="@android:drawable/ic_media_play" />
 
         <ImageButton
-
-            android:backgroundTint="#FC9"
-            android:tint="@color/colorPrimaryDark"
-            android:contentDescription="cancel"
-            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
             android:id="@+id/ibCancelTrailer"
-            android:onClick="CancelPreview"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:background="@color/background_white"
-            android:layout_marginEnd="35dp"
+            style="@style/ib_cancel_trailer"
+            android:layout_width="@dimen/border_margin"
+            android:layout_height="@dimen/border_margin"
             android:layout_alignEnd="@+id/ivPreview"
-            android:layout_alignParentTop="true" />
+            android:contentDescription="@string/cancel"
+            android:onClick="CancelPreview"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel" />
 
-</RelativeLayout>
+    </RelativeLayout>
 
 
 </FrameLayout>

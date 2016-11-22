@@ -20,4 +20,12 @@
     <string name="contacts">Contacts</string>
     <string name="send">SEND</string>
     <string name="popular_movie_trailer">Popular Movie Trailer</string>
+    <string name="cancel">cancel</string>
+    <string name="expand">Expand</string>
+    <string name="search_hint">Name</string>
+    <string name="email">Email</string>
+    <string name="firstlastname">Firstname Lastname</string>
+    <string name="timestamp">Timestamp</string>
+    <string name="lastcomment">You: Last chat comment by you</string>
+    <string name="poster_image">poster Image</string>
 </resources>

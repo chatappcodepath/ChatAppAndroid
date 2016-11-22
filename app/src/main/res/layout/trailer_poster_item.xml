@@ -1,29 +1,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="5dp"
-
+    android:layout_marginTop="@dimen/small_spacing"
     android:orientation="vertical"
-    android:padding="5dp">
+    android:padding="@dimen/small_spacing">
 
     <ImageView
         android:id="@+id/ivTrailerImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="@dimen/standard_poster_image_size"
+        android:layout_height="@dimen/standard_poster_image_size"
+        android:contentDescription="@string/poster_image"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher"
-        android:contentDescription="poster Image"/>
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/tvTrailerTitle"
+        style="@style/tv_poster_item"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginTop="5dp"
-        android:ellipsize="marquee"
-        android:gravity="center"
-        android:maxLines="2"
-        tools:text="sampletest"
-        android:textSize="12sp" />
+        tools:text="sampletest" />
 
 </LinearLayout>
