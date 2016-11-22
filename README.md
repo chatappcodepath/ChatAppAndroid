@@ -16,32 +16,37 @@ Please look at the user stories for more details.
 
 The following **required** functionality is completed:
 
-* [ ]   User can **sign in to Chat** using OAuth login
-* [ ]   User can **chat one to one**
-* [ ]   User can **create a chat group** and communicate with each other.
-* [ ]   User can share **Images Videos Gifs**.
-* [ ]   User can enter Autochat mode and keep on chatting in autonomous mode.
-* [ ]   User can schedule messages to be sent at designated times.
-* [ ]   Support offline mode.
+* [ Done]   User can **sign in to Chat** using OAuth login
+* [ Done]   User can **chat one to one**
+* [ Done]   User can **create a chat group** and communicate with each other.
+* [ Done]   User can share ** Video Trailers**(Add On).
+* [ Done]   User can enter Autochat mode and keep on chatting in autonomous mode.
+* [ Done]   Push notifications are enabled
+
 
 The following **optional** features are implemented:
 
-* [ ] Add support for **Notificaions**.
+* [Done ] Add support for **Notificaions**.
 * [ ] Add support for Maps/Location sharing.
 * [ ] Have advanced Trained Models using tensorflow.
 * [ ] Ads integration. (Money on side doesn't hurt)
 * [ ] Publish to iOS and Android App store.
-* [ ] Add support for Video calls using WebRTC.
+* [ ] Add support for images,video sharing and Video calls using WebRTC.
+* [ ] Support offline mode.
 * [ ] Add extensions for **Chat Application**
     * [ ] Todos messages app extension
     * [ ] Finance messages app extension
     * [ ] Tic-tac-toe messages app extension
     * [ ] Card games messages app extension
-    * [ ] Add Sharing Movies Trailers.
+    * [Done ] Add Sharing Movies Trailers.
     * [ ] Share News etc.
     * [ ] Send Alarm.
     * [ ] Expense sharing.
     * [ ] Presentations over Chat.
+    
+Video Previews:
+
+
 
 ## References
 
