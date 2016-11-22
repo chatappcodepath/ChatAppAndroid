@@ -44,12 +44,21 @@ The following **optional** features are implemented:
     * [ ] Expense sharing.
     * [ ] Presentations over Chat.
     
-Video Previews:All Gifs are included with Repository and at below path:
+Video Previews:All Gifs are included with Repository :
 
-1)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_SignIn.gif
-2)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_Movie.gif
-3)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_Eliza.gif
-4)https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_PushNotif.gif
+https://github.com/chatappcodepath/ChatAppAndroid/commit/13b44838af2ab2d56706f8dc93f8df07a3b05b56
+
+and at below path(In same Order):
+
+1)Signin: 
+<img src='https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_SignIn.gif' title='ChatApp Sign in' width='' alt='ChatApp Sign in' />
+
+2)Movie trailer :<img src='https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_Movie.gif' title='ChatApp Movie  Trailer' width='' alt='ChatApp Movie Trailer' />
+ 
+
+3)Autobot enabled : <img src='https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_Eliza.gif' title='ChatApp Autobot Enabled' width='' alt='ChatApp Autobot Enabled' />
+
+4)Push notifications: <img src='https://raw.githubusercontent.com/chatappcodepath/ChatAppAndroid/master/ChatApp_PushNotif.gif' title='ChatApp Push Notifications Enabled' width='' alt='ChatApp Push Notifications Enabled' />
 
 
 ## References
