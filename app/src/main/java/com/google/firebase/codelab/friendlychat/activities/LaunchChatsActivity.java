@@ -2,10 +2,12 @@ package com.google.firebase.codelab.friendlychat.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +17,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -53,6 +54,13 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
         setContentView(R.layout.activity_launch_chats);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        // Get access to our TextView
+        TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
+        // Create the TypeFace from the TTF asset
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
+        // Assign the typeface to the view
+        mTitle.setTypeface(font);
 
         myGroups = new ArrayList<>();
         mGroupsAdapter = new LaunchChatsAdapter(this, myGroups, new LaunchChatsAdapter.ClickDelegate() {
@@ -134,9 +142,8 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
 
     private void setFAB(){
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        Glide.with(this).load(R.drawable.ic_action_addchat_wh)
-                .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .into(fab);
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_vector_addchat));
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

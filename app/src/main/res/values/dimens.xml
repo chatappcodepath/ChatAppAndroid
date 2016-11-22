@@ -11,6 +11,11 @@
     <dimen name="rv_top_margin">60dp</dimen>
     <dimen name="tv_signin_margin">80dp</dimen>
 
+    <dimen name="textsize_small">13sp</dimen>
+    <dimen name="textsize_regular">15sp</dimen>
+    <dimen name="textsize_header">20sp</dimen>
+    <dimen name="textsize_large">30sp</dimen>
+
     <dimen name="standard_chat_image_size">36dp</dimen>
     <dimen name="standard_contact_image_size">50dp</dimen>
     <dimen name="standard_poster_image_size">100dp</dimen>

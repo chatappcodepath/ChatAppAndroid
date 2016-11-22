@@ -2,13 +2,18 @@
 <resources>
     <!-- This is declaring the XML attributes that can be set within a theme. -->
     <!-- Check the "res/values/themes.xml" file for examples of these attributes being set.  -->
+    <attr name="myColorPrimary" format="reference"/>
+    <attr name="myColorPrimaryDark" format="reference"/>
+    <attr name="myColorAccent" format="reference"/>
+
     <attr name="mainBackground" format="reference" />
     <attr name="headerBackground" format="reference" />
     <attr name="toolbarBackground" format="reference" />
 
-    <!-- <attr name="textSubheader" format="reference" />
-    <attr name="textLarge" format="reference" />
-    <attr name="textRegular" format="reference" /> -->
+    <attr name="textName" format="reference" />
+    <attr name="textEmail" format="reference" />
+    <attr name="textRegular" format="reference" />
+
     <attr name="tvToolbar" format="reference" />
     <attr name="tvSignin" format="reference" />
     <attr name="ibCreate" format="reference" />

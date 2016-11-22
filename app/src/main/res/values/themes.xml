@@ -4,22 +4,22 @@
     <!-- Check the "res/values/attrs.xml" file for where these style names are first defined.  -->
     <style name="Theme.CHATAPP_THEME" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="myColorPrimary">@color/colorPrimary</item>
+        <item name="myColorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="myColorAccent">@color/colorAccent</item>
 
-        <item name="android:colorButtonNormal" tools:targetApi="lollipop">
-            @drawable/button_selector
-        </item>
+        <item name="android:colorButtonNormal" tools:targetApi="lollipop">@drawable/button_selector</item>
         <item name="colorButtonNormal">@drawable/button_selector</item>
         <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>
 
         <item name="mainBackground">@style/general_background</item>
         <item name="headerBackground">@style/header_background</item>
         <item name="toolbarBackground">@style/toolbar_background</item>
-        <!--<item name="textSubheader">@style/text_subheader_ct</item>
-        <item name="textLarge">@style/text_large_ct</item>
-        <item name="textRegular">@style/text_regular_ct</item> -->
+
+        <item name="textName">@style/text_name</item>
+        <item name="textEmail">@style/text_email</item>
+        <item name="textRegular">@style/text_regular</item>
+
         <item name="tvToolbar">@style/tv_toolbar</item>
         <item name="tvSignin">@style/tv_sign_in</item>
         <item name="ibBack">@style/ib_back_contacts</item>

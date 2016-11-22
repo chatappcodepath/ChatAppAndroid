@@ -2,6 +2,7 @@ package com.google.firebase.codelab.friendlychat.activities;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +54,9 @@ public class ContactsListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         TextView mTitle = (TextView)findViewById(R.id.toolbar_title);
         mTitle.setText("");
+        TextView mContactsTitle = (TextView)findViewById(R.id.tvContacts);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
+        mContactsTitle.setTypeface(font);
 
         FirebaseCrash.log("OnCreateMethod");
         final Context mContext = getApplicationContext();

@@ -16,12 +16,14 @@
 package com.google.firebase.codelab.friendlychat.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -62,6 +64,12 @@ public class SignInActivity extends AppCompatActivity implements
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        TextView mTitle = (TextView)findViewById(R.id.toolbar_title);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
+        mTitle.setTypeface(font);
+
+        TextView signin = (TextView)findViewById(R.id.tv_sign_in);
+        signin.setTypeface(font);
 
         // Assign fields
         mSignInButton = (SignInButton) findViewById(R.id.sign_in_button);

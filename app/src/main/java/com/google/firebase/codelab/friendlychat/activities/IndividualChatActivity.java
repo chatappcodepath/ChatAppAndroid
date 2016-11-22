@@ -17,6 +17,7 @@ package com.google.firebase.codelab.friendlychat.activities;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -34,6 +35,7 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -91,6 +93,10 @@ public class IndividualChatActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_individual_chat);
+        TextView mTitle = (TextView)findViewById(R.id.toolbar_title);
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
+        mTitle.setTypeface(font);
+
         //view initialisation for movie fragment
         linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
         linearLayout_fragment = (LinearLayout) findViewById(R.id.llFragment);

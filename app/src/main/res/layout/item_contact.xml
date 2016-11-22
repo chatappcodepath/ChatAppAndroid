@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/border_margin"
-        app:srcCompat="@drawable/ic_account_circle_black_36dp" />
+        app:srcCompat="@drawable/ic_vector_account" />
 
     <TextView
         android:id="@+id/tvNameContacts"
@@ -25,6 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_toRightOf="@id/ivProfileImageContacts"
         android:paddingTop="@dimen/border_margin"
+        android:textAppearance="@style/text_name"
         tools:text="@string/firstlastname" />
 
     <TextView
@@ -34,5 +35,6 @@
         android:layout_below="@id/tvNameContacts"
         android:layout_toEndOf="@id/ivProfileImageContacts"
         android:layout_toRightOf="@id/ivProfileImageContacts"
+        android:textAppearance="@style/text_email"
         tools:text="@string/email" />
 </RelativeLayout>
