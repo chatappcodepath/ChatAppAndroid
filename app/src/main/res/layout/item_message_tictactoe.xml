@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:myapp="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/messengerImageView"
+        android:layout_width="@dimen/standard_chat_image_size"
+        android:layout_height="@dimen/standard_chat_image_size"
+        android:src="@drawable/ic_vector_account" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TableLayout android:id="@+id/tableLayout1" android:layout_width="fill_parent"
+            android:background="@android:color/white"
+            android:weightSum="3" android:layout_height="wrap_content" android:layout_marginLeft="10dip" android:layout_marginRight="10dip">
+            <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_weight="1">
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:adjustViewBounds="true" android:scaleType="fitXY"
+                    android:id="@+id/GameTile01" android:layout_height="wrap_content" myapp:row="0" myapp:col="0"
+                    android:layout_weight="1" android:layout_width="fill_parent" android:src="@drawable/blank"/>
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_weight="1" android:scaleType="fitXY"
+                    android:adjustViewBounds="true" android:id="@+id/GameTile02" android:layout_height="wrap_content"
+                    myapp:row="0" myapp:col="1"
+                    myapp:borderLeft="true" myapp:borderRight="true"
+                    android:layout_width="fill_parent" android:src="@drawable/blank"/>
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:adjustViewBounds="true" android:scaleType="fitXY"
+                    android:layout_weight="1" android:id="@+id/GameTile03"
+                    myapp:row="0" myapp:col="2"
+                    android:layout_height="wrap_content" android:layout_width="fill_parent" android:src="@drawable/blank"/>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_weight="1">
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_width="wrap_content" android:adjustViewBounds="true"
+                    android:scaleType="fitXY" android:id="@+id/GameTile04"
+                    myapp:borderTop="true" myapp:borderBottom="true"
+                    myapp:row="1" myapp:col="0"
+                    android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/blank"/>
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:scaleType="fitXY"
+                    android:adjustViewBounds="true" myapp:borderTop="true" myapp:borderBottom="true"
+                    myapp:borderLeft="true" myapp:borderRight="true"
+                    myapp:row="1" myapp:col="1"
+                    android:id="@+id/GameTile05" android:src="@drawable/blank"/>
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" android:scaleType="fitXY"
+                    android:layout_weight="1" myapp:borderTop="true" myapp:borderBottom="true"
+                    myapp:row="1" myapp:col="2"
+                    android:id="@+id/GameTile06" android:src="@drawable/blank"/>
+            </TableRow>
+            <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_weight="1">
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:adjustViewBounds="true"
+                    myapp:row="2" myapp:col="0"
+                    android:scaleType="fitXY" android:id="@+id/GameTile07" android:src="@drawable/blank"/>
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_weight="1" android:scaleType="fitXY"
+                    android:adjustViewBounds="true" myapp:borderLeft="true" myapp:borderRight="true"
+                    myapp:row="2" myapp:col="1"
+                    android:id="@+id/GameTile08" android:src="@drawable/blank"/>
+                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:adjustViewBounds="true" android:scaleType="fitXY"
+                    android:layout_weight="1" myapp:row="2" myapp:col="2"
+                    android:id="@+id/GameTile09" android:src="@drawable/blank"/>
+            </TableRow>
+        </TableLayout>
+        <TextView
+            android:id="@+id/tvResult"
+            android:layout_width="match_parent"
+            android:textSize="20sp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="Hello World Kevin" />
+    </LinearLayout>
+
+</LinearLayout>

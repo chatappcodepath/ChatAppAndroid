@@ -94,7 +94,11 @@ public class FirebaseClient {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Log.d(TAG, "got the Groups data");
                 HashMap valueMap = (HashMap) dataSnapshot.getValue();
-                groupIdsForCurrentUser = (String[]) valueMap.keySet().toArray(new String[valueMap.size()]);
+                if (valueMap == null) {
+                    groupIdsForCurrentUser = new String[]{};
+                } else {
+                    groupIdsForCurrentUser = (String[]) valueMap.keySet().toArray(new String[valueMap.size()]);
+                }
                 executePostSetupInterfaces();
             }
 
