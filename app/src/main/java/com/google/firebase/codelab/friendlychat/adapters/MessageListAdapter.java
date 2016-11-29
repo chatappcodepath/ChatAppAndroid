@@ -1,7 +1,6 @@
 package com.google.firebase.codelab.friendlychat.adapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -25,10 +24,12 @@ public class MessageListAdapter extends FirebaseRecyclerAdapter<FriendlyMessage,
 
     private final int MOVIE = 1, TEXT = 2, SENTINEL = 3, TICTACTOE = 4;
     private Context activityContext;
+    private String gid;
 
-    public MessageListAdapter(Query ref, Context activityContext) {
+    public MessageListAdapter(Query ref, Context activityContext, String gid) {
         super(FriendlyMessage.class, R.layout.item_message_text, MessageViewHolder.class, ref);
         this.activityContext = activityContext;
+        this.gid = gid;
     }
 
     @Override
@@ -69,8 +70,8 @@ public class MessageListAdapter extends FirebaseRecyclerAdapter<FriendlyMessage,
                     }
 
                     @Override
-                    public void sendMessage(String messageToBeSent) {
-                        Log.d("KEVINDEBUG", "You need to send the message" + messageToBeSent);
+                    public void sendMessage(FriendlyMessage currentMessage, String messageToBeSent) {
+                        ChatApplication.getFirebaseClient().updateMessageForGroup(gid, currentMessage, messageToBeSent);
                     }
                 });
                 break;

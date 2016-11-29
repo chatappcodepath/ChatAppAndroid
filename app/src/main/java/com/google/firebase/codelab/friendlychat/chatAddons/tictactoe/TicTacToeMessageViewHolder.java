@@ -31,7 +31,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
 
     public interface TTTParentInterface {
         public String getCurrentSenderID();
-        public void sendMessage(String messageToBeSent);
+        public void sendMessage(FriendlyMessage currentMessage, String messageToBeSent);
     }
 
     public static int layoutID = R.layout.item_message_tictactoe;
@@ -43,6 +43,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
     TTTParentInterface mInterface;
     private Context activityContext;
     private TileClickHandler mClickHandler;
+    FriendlyMessage currentMessage;
 
     public static final int[] GAME_TILE_IDS = { R.id.GameTile01,
             R.id.GameTile02, R.id.GameTile03, R.id.GameTile04, R.id.GameTile05,
@@ -113,6 +114,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
 
     @Override
     public void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
+        this.currentMessage = model;
         gameState = GameState.instanceFrom(model.getPayLoad());
         if (model.getPhotoUrl() == null) {
             this.messengerImageView
@@ -151,7 +153,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
         }
 
         public void updateStatusMessage() {
-            mInterface.sendMessage(gameState.getJsonPayload());
+            mInterface.sendMessage(currentMessage, gameState.getJsonPayload());
             populateTVResult();
         }
     }

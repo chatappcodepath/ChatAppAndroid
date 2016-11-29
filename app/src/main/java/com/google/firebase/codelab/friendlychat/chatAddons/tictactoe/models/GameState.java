@@ -131,12 +131,15 @@ public class GameState {
             return false;
         }
 
-        GameMove lastMove = getLastMove();
-        int nextTileState = TicTacToeConstants.TILE_STATE_O;
-        Set<String> imPermissibleSids = xSids;
-        if (lastMove.tileState() == TicTacToeConstants.TILE_STATE_O) {
-            nextTileState = TicTacToeConstants.TILE_STATE_X;
-            imPermissibleSids = oSids;
+        int nextTileState = TicTacToeConstants.TILE_STATE_X;
+        Set<String> imPermissibleSids = oSids;
+
+        if (moves.size() > 0) {
+            GameMove lastMove = getLastMove();
+            if (lastMove.tileState() == nextTileState) {
+                nextTileState = TicTacToeConstants.TILE_STATE_O;
+                imPermissibleSids = xSids;
+            }
         }
 
         if (imPermissibleSids.contains(sid)) {

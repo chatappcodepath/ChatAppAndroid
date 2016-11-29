@@ -150,12 +150,24 @@ public class FirebaseClient {
         getGroupsForCurrentUser(fetchedMultiChildListener);
     }
 
+    public void updateMessageForGroup(String groupID, FriendlyMessage currentMessage, String messagePayload) {
+        currentMessage.setTs((new Date()).getTime());
+        currentMessage.setPayLoad(messagePayload);
+        mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(groupID).child(currentMessage.getMid()).setValue(currentMessage);
+        updateGroupRefsAndSendNotifications(groupID, currentMessage);
+    }
+
     public void sendMessageForGroup(String groupID, FriendlyMessage messageToSend) {
-        mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(groupID)
-                .push().setValue(messageToSend);
+        DatabaseReference newChildRef = mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(groupID).push();
+        messageToSend.setMid(newChildRef.getKey());
+        newChildRef.setValue(messageToSend);
+        updateGroupRefsAndSendNotifications(groupID, messageToSend);
+    }
+
+    public void updateGroupRefsAndSendNotifications(String groupID, FriendlyMessage messageToSend) {
         DatabaseReference groupReference = mFirebaseDatabaseReference.child(GROUPS_NODE).child(groupID);
         groupReference.child("lmSnippet").setValue(messageToSend.getPayLoad());
-        groupReference.child("ts").setValue((new Date()).getTime());
+        groupReference.child("ts").setValue(messageToSend.getTs());
         sendNotificationForGroup(groupID, messageToSend);
     }
 
