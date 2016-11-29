@@ -92,7 +92,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
         gameResultState = gameState.getGameResult(mInterface.getCurrentSenderID());
 
         if (gameResultState == PLAYING) {
-            return;
+            tvResult.setText("");
         }
 
         if (gameResultState == WINS) {
