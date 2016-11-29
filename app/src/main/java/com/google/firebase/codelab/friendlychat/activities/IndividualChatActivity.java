@@ -263,6 +263,10 @@ public class IndividualChatActivity extends AppCompatActivity
 //        }
 //    }
 
+    public void onStartTTT(View view) {
+        sendMessageWithPayload("[]", FriendlyMessage.MessageType.TicTacToe, false);
+    }
+
     public void onAddTrailor(View view) {
         //reset linear layout
         RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
