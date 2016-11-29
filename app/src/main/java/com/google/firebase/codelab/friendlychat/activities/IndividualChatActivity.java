@@ -53,6 +53,7 @@ import com.google.firebase.codelab.friendlychat.utilities.CodelabPreferences;
 import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.MESSAGES_FOR_GROUP_NODE;
 
@@ -137,7 +138,9 @@ public class IndividualChatActivity extends AppCompatActivity
 
         // New child entries
         mFirebaseDatabaseReference = FirebaseDatabase.getInstance().getReference();
-        mFirebaseAdapter = new MessageListAdapter(mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(currentGroupID), this);
+        Query groupsQuery = mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(currentGroupID).orderByChild("ts").limitToLast(25);
+
+        mFirebaseAdapter = new MessageListAdapter(groupsQuery, this, currentGroupID);
 
         mFirebaseAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver()
 
@@ -259,6 +262,10 @@ public class IndividualChatActivity extends AppCompatActivity
 //            CancelTrailers(this.getCurrentFocus());
 //        }
 //    }
+
+    public void onStartTTT(View view) {
+        sendMessageWithPayload("[]", FriendlyMessage.MessageType.TicTacToe, false);
+    }
 
     public void onAddTrailor(View view) {
         //reset linear layout

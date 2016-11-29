@@ -27,4 +27,14 @@
     <attr name="ivOverlay" format="reference"/>
     <attr name="ibCancelTrailer" format="reference"/>
 
+    <declare-styleable name="TicTacToeTile">
+        <attr name="borderLeft" format="boolean" />
+        <attr name="borderRight" format="boolean" />
+        <attr name="borderTop" format="boolean" />
+        <attr name="borderBottom" format="boolean" />
+        <attr name="row" format="integer" />
+        <attr name="col" format="integer" />
+    </declare-styleable>
+
 </resources>
+

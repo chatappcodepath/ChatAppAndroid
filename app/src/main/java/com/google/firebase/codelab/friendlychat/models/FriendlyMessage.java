@@ -15,6 +15,7 @@
  */
 package com.google.firebase.codelab.friendlychat.models;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 import com.google.firebase.database.Exclude;
 
@@ -29,6 +30,7 @@ public class FriendlyMessage {
     private String name;
     private String photoUrl;
     private String sid;
+    private String mid;
     private MessageType msgType;
     private String payLoad;
     private Boolean isBotMessage;
@@ -48,6 +50,17 @@ public class FriendlyMessage {
     public FriendlyMessage() {
     }
 
+    public FriendlyMessage(MessageType msgType, String payLoad) {
+        FirebaseUser firUser = ChatApplication.getFirebaseClient().getmFirebaseUser();
+        this.payLoad = payLoad;
+        this.name = firUser.getDisplayName();
+        this.photoUrl = firUser.getPhotoUrl().toString();
+        this.sid = firUser.getUid();
+        this.msgType = msgType;
+        this.isBotMessage = false;
+        this.ts = (new Date()).getTime();
+    }
+
     public FriendlyMessage(String text, String name, String photoUrl, MessageType msgType, Boolean isBotMessage) {
         this.payLoad = text;
         this.name = name;
@@ -56,6 +69,14 @@ public class FriendlyMessage {
         this.msgType = msgType;
         this.isBotMessage = isBotMessage;
         this.ts = (new Date()).getTime();
+    }
+
+    public String getMid() {
+        return mid;
+    }
+
+    public void setMid(String mid) {
+        this.mid = mid;
     }
 
     public String getName() {
