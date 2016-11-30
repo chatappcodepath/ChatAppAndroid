@@ -61,6 +61,7 @@ public class IndividualChatActivity extends AppCompatActivity
         implements AddonsProtocols.AddonsListener,TrailerFragment.PreviewIFragmentnteractionListener {
 
     public static final String INTENT_GROUP_KEY = "groupKey";
+    public static final String INTENT_GROUP_TITLE = "groupTitle";
     private static final String TAG = "IndividualChatActivity";
    // private static final int REQUEST_INVITE = 1;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 100;
@@ -109,6 +110,7 @@ public class IndividualChatActivity extends AppCompatActivity
         mUsername = ANONYMOUS;
         this.shouldAutoReply = false;
         currentGroupID = getIntent().getStringExtra(INTENT_GROUP_KEY);
+        mTitle.setText(getIntent().getStringExtra(INTENT_GROUP_TITLE));
 
         mFirebaseAuth = ChatApplication.getFirebaseClient().getmFirebaseAuth();
         mAuthStateListener = new FirebaseAuth.AuthStateListener() {

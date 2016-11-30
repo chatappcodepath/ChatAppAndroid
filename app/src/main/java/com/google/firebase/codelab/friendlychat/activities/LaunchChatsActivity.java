@@ -34,6 +34,7 @@ import com.google.firebase.crash.FirebaseCrash;
 import java.util.ArrayList;
 
 import static com.google.firebase.codelab.friendlychat.activities.IndividualChatActivity.INTENT_GROUP_KEY;
+import static com.google.firebase.codelab.friendlychat.activities.IndividualChatActivity.INTENT_GROUP_TITLE;
 
 /**
  * Created by aditi on 11/10/2016.
@@ -55,11 +56,13 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final String currentUserName = ChatApplication.getFirebaseClient().getmFirebaseUser().getDisplayName();
         // Get access to our TextView
         TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
         // Create the TypeFace from the TTF asset
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
         // Assign the typeface to the view
+        mTitle.setText("Hello " + currentUserName);
         mTitle.setTypeface(font);
 
         myGroups = new ArrayList<>();
@@ -68,6 +71,7 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
             public void onConversationClicked(Group selectedGroup) {
                 Intent i = new Intent(context , IndividualChatActivity.class);
                 i.putExtra(INTENT_GROUP_KEY, selectedGroup.getId());
+                i.putExtra(INTENT_GROUP_TITLE, selectedGroup.getTitle().replace(currentUserName, ""));
                 context.startActivity(i);
             }
         });

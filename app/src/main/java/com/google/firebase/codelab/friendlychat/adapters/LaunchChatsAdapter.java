@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.codelab.friendlychat.R;
 import com.google.firebase.codelab.friendlychat.models.Group;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
@@ -63,10 +64,12 @@ public class LaunchChatsAdapter extends RecyclerView.Adapter<LaunchChatsAdapter.
     @Override
     public void onBindViewHolder(LaunchChatsAdapter.ViewHolder viewholder, int position) {
         Group currentGroup = myGroups.get(position);
-        String currentUserID = ChatApplication.getFirebaseClient().getmFirebaseUser().getUid();
+        FirebaseUser currentUser = ChatApplication.getFirebaseClient().getmFirebaseUser();
+        String currentUserID = currentUser.getUid();
         viewholder.selectedGroup = currentGroup;
         Glide.with(mContext).load(currentGroup.getImageUrl(currentUserID)).into(viewholder.civProfileImage);
-        viewholder.tvChatContactName.setText(currentGroup.getTitle());
+        String groupTitleString = currentGroup.getTitle().replace(currentUser.getDisplayName(), "");
+        viewholder.tvChatContactName.setText(groupTitleString);
         viewholder.tvChatTimestamp.setText(currentGroup.getRelativeTimeStamp());
         viewholder.tvChatLastComment.setText(currentGroup.getLastMessageSnippet());
     }
