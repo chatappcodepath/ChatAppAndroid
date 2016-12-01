@@ -16,9 +16,6 @@
 
     <attr name="tvToolbar" format="reference" />
     <attr name="tvSignin" format="reference" />
-    <attr name="ibCreate" format="reference" />
-    <attr name="ibBack" format="reference" />
-    <attr name="tvContacts" format="reference" />
     <attr name="ibTrailer1" format="reference" />
     <attr name="ibTrailer2" format="reference" />
     <attr name="tvTrailer" format="reference" />
