@@ -65,7 +65,7 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        
         final String currentUserName = ChatApplication.getFirebaseClient().getmFirebaseUser().getDisplayName();
         Log.d("DEBUG Username",currentUserName);
 

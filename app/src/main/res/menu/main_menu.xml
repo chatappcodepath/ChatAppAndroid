@@ -5,8 +5,5 @@
         android:id="@+id/sign_out_menu"
         android:title="@string/sign_out"
         app:showAsAction="collapseActionView"/>
-    <item
-        android:id="@+id/invite_menu"
-        android:title="@string/invite_menu_label"
-        app:showAsAction="collapseActionView"/>
+
 </menu>
