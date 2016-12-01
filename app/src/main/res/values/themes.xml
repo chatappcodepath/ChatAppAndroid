@@ -9,6 +9,7 @@
         <item name="myColorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="myColorAccent">@color/colorAccent</item>
 
+        <item name="android:itemTextAppearance">@style/menuTextApearance</item>
         <item name="android:colorButtonNormal" tools:targetApi="lollipop">@drawable/button_selector</item>
         <item name="colorButtonNormal">@drawable/button_selector</item>
         <item name="android:buttonStyle">@style/FriendlyButtonStyle</item>
