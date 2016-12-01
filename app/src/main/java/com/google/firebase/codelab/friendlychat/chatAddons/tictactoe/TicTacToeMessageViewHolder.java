@@ -68,7 +68,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
     }
 
     private void setTilesDrawables(View retView) {
-        TicTacToeTile.setDrawableX(ContextCompat.getDrawable(activityContext, R.drawable.x));
+        TicTacToeTile.setDrawableX(ContextCompat.getDrawable(activityContext, R.drawable.cross));
         TicTacToeTile.setDrawableO(ContextCompat.getDrawable(activityContext, R.drawable.circle));
         TicTacToeTile.setDrawableBlank(ContextCompat.getDrawable(activityContext, R.drawable.blank));
 

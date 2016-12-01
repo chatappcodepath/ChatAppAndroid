@@ -13,12 +13,12 @@ public class GameMove {
 
     public GameMove(String sid, int move, int position) {
         this.sid = sid;
-        this.move = (move == TicTacToeConstants.TILE_STATE_O) ? "o" : "x";
+        this.move = (move == TicTacToeConstants.TILE_STATE_O) ? "o" : "cross";
         this.position = position;
     }
 
     public int tileState() {
-        if (this.move.equals("x")) {
+        if (this.move.equals("cross")) {
             return TicTacToeConstants.TILE_STATE_X;
         }
         return TicTacToeConstants.TILE_STATE_O;

@@ -3,6 +3,7 @@
 
     <!-- Check the "res/values/attrs.xml" file for where these style names are first defined.  -->
     <style name="Theme.CHATAPP_THEME" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowContentTransitions">true</item>
 
         <item name="myColorPrimary">@color/colorPrimary</item>
         <item name="myColorPrimaryDark">@color/colorPrimaryDark</item>
@@ -20,11 +21,9 @@
         <item name="textEmail">@style/text_email</item>
         <item name="textRegular">@style/text_regular</item>
 
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
         <item name="tvToolbar">@style/tv_toolbar</item>
         <item name="tvSignin">@style/tv_sign_in</item>
-        <item name="ibBack">@style/ib_back_contacts</item>
-        <item name="ibCreate">@style/ib_create_contacts</item>
-        <item name="tvContacts">@style/tv_contacts</item>
         <item name="ibTrailer1">@style/ib_trailer1</item>
         <item name="ibTrailer2">@style/ib_trailer2</item>
         <item name="tvTrailer">@style/tv_trailer</item>

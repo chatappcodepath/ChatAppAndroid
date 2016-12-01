@@ -8,7 +8,7 @@ public interface TicTacToeDrawable {
 
     /**
      * Set the state for the tile
-     * @param state An integer value representing the current state (empty, x, or circle)
+     * @param state An integer value representing the current state (empty, cross, or circle)
      */
     public void setState(int state);
 
