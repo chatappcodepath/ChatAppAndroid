@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -65,6 +66,7 @@ public class IndividualChatActivity extends AppCompatActivity
     private static final String TAG = "IndividualChatActivity";
    // private static final int REQUEST_INVITE = 1;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 100;
+    public static final long DEFAULT_AUTOREPLY_DELAY = 2000;
     public static final String ANONYMOUS = "anonymous";
    // private static final String MESSAGE_SENT_EVENT = "message_sent";
     private String mUsername;
@@ -78,7 +80,7 @@ public class IndividualChatActivity extends AppCompatActivity
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Boolean shouldAutoReply;
-    private Integer lastIndex;
+    private String lastProcessedMid;
     private LinearLayout linearLayout;
     private LinearLayout linearLayout_fragment;
     private FrameLayout flMovieFragment;
@@ -222,15 +224,22 @@ public class IndividualChatActivity extends AppCompatActivity
 
 
     public void sendAutoReplyForMessageAtIndex(int index) {
-        if (lastIndex != null && lastIndex == index - 1 && shouldAutoReply) {
-            FriendlyMessage message = mFirebaseAdapter.getItem(index);
-            if (!message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid()) &&
+        if (shouldAutoReply) {
+            final FriendlyMessage message = mFirebaseAdapter.getItem(index);
+            if ((lastProcessedMid == null || !lastProcessedMid.equals(message.getMid())) &&
+                !message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid()) &&
                     !message.getIsBotMessage()) {
-                String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
-                sendMessageWithPayload(autoReplyText, FriendlyMessage.MessageType.Text, true);
+                final String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        sendMessageWithPayload(autoReplyText, FriendlyMessage.MessageType.Text, true);
+                    }
+                }, DEFAULT_AUTOREPLY_DELAY);
             }
+            lastProcessedMid = message.getMid();
         }
-        lastIndex = index;
     }
 
     @Override
