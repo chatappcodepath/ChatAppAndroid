@@ -20,10 +20,6 @@ public class TicTacToeTile extends ImageView implements TicTacToeDrawable {
     // Constants
     public static final int DEFAULT_PAINT_WIDTH = 10;
 
-    // Dimensions
-    private int mWidth;
-    private int mHeight;
-
     // Borders
     private Paint mBorderPaint;
     private boolean mBorderLeft = false;
@@ -108,15 +104,6 @@ public class TicTacToeTile extends ImageView implements TicTacToeDrawable {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        // Save the dimensions
-        mWidth = getWidth();
-        mHeight = getHeight();
-    }
-
-    @Override
     public void setState(int state) {
         mState = state;
 
@@ -140,6 +127,9 @@ public class TicTacToeTile extends ImageView implements TicTacToeDrawable {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        // Dimensions
+        int mWidth = getWidth();
+        int mHeight = getHeight();
 
         // Always call the super
         super.onDraw(canvas);
