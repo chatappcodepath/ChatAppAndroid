@@ -65,10 +65,8 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        
-        final String currentUserName = ChatApplication.getFirebaseClient().getmFirebaseUser().getDisplayName();
-        Log.d("DEBUG Username",currentUserName);
 
+        final String currentUserName = ChatApplication.getFirebaseClient().getmFirebaseUser().getDisplayName();
         TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
         // Create the TypeFace from the TTF asset
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");

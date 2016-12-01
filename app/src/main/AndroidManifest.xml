@@ -11,6 +11,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:label=""
         android:theme="@style/Theme.CHATAPP_THEME">
         <activity android:name=".activities.IndividualChatActivity"/>
         <activity android:name=".activities.SignInActivity">
