@@ -159,7 +159,10 @@ public class FirebaseClient {
 
     public void sendMessageForGroup(String groupID, FriendlyMessage messageToSend) {
         DatabaseReference newChildRef = mFirebaseDatabaseReference.child(MESSAGES_FOR_GROUP_NODE).child(groupID).push();
+        FirebaseUser currentUser = ChatApplication.getFirebaseClient().getmFirebaseUser();
         messageToSend.setMid(newChildRef.getKey());
+        messageToSend.setName(currentUser.getDisplayName());
+        messageToSend.setPhotoUrl(currentUser.getPhotoUrl().toString());
         newChildRef.setValue(messageToSend);
         updateGroupRefsAndSendNotifications(groupID, messageToSend);
     }

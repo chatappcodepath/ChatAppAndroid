@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
@@ -49,6 +50,7 @@ import com.google.firebase.codelab.friendlychat.adapters.ViewPagerAdapter;
 import com.google.firebase.codelab.friendlychat.chatAddons.MessageViewHolder;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.MovieFragment;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.TrailerFragment;
+import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameState;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.helpers.NestedScrollableViewHelper;
 import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.fragments.TicTacToeFragment;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
@@ -60,10 +62,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-
-import static android.view.View.VISIBLE;
+import static com.google.firebase.codelab.friendlychat.models.FriendlyMessage.MessageType.TicTacToe;
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.MESSAGES_FOR_GROUP_NODE;
-
+import static android.view.View.VISIBLE;
 public class IndividualChatActivity extends AppCompatActivity
         implements AddonsProtocols.AddonsListener,TrailerFragment.PreviewIFragmentnteractionListener {
 
@@ -72,6 +73,7 @@ public class IndividualChatActivity extends AppCompatActivity
     private static final String TAG = "IndividualChatActivity";
    // private static final int REQUEST_INVITE = 1;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 100;
+    public static final long DEFAULT_AUTOREPLY_DELAY = 2000;
     public static final String ANONYMOUS = "anonymous";
    // private static final String MESSAGE_SENT_EVENT = "message_sent";
     private String mUsername;
@@ -85,6 +87,7 @@ public class IndividualChatActivity extends AppCompatActivity
     private ProgressBar mProgressBar;
     private EditText mMessageEditText;
     private Boolean shouldAutoReply;
+    private String lastProcessedMid;
     private Integer lastIndex;
     //AddOns
     private LinearLayout linearLayout;
@@ -181,6 +184,12 @@ public class IndividualChatActivity extends AppCompatActivity
                     mMessageRecyclerView.scrollToPosition(positionStart);
                 }
             }
+
+            @Override
+            public void onItemRangeChanged(int positionStart, int itemCount) {
+                super.onItemRangeChanged(positionStart, itemCount);
+                sendAutoReplyForMessageAtIndex(positionStart);
+            }
         });
 
 
@@ -237,15 +246,40 @@ public class IndividualChatActivity extends AppCompatActivity
     }
 
     public void sendAutoReplyForMessageAtIndex(int index) {
-        if (lastIndex != null && lastIndex == index - 1 && shouldAutoReply) {
+        if (shouldAutoReply) {
             FriendlyMessage message = mFirebaseAdapter.getItem(index);
-            if (!message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid()) &&
+            if (message.getMsgTypeAsEnum() == FriendlyMessage.MessageType.TicTacToe) {
+                sendAutoReplyTicTacToeMessage(message);
+            }
+            if ((lastProcessedMid == null || !lastProcessedMid.equals(message.getMid())) &&
+                !message.getSid().equals(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid()) &&
                     !message.getIsBotMessage()) {
-                String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
-                sendMessageWithPayload(autoReplyText, FriendlyMessage.MessageType.Text, true);
+                if (message.getMsgTypeAsEnum() == FriendlyMessage.MessageType.Text) {
+                    String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
+                    sendMessageAfterStandardDelay(autoReplyText, FriendlyMessage.MessageType.Text, true);
+                }
+                lastProcessedMid = message.getMid();
             }
         }
-        lastIndex = index;
+    }
+
+    public void sendAutoReplyTicTacToeMessage(FriendlyMessage message) {
+        GameState gameState = GameState.instanceFrom(message.getPayLoad());
+        String myCurrentSid = ChatApplication.getFirebaseClient().getmFirebaseUser().getUid();
+        String ticTacToePayload = gameState.getAutomaticMove(myCurrentSid);
+        if (ticTacToePayload != null){
+            ChatApplication.getFirebaseClient().updateMessageForGroup(currentGroupID,message, ticTacToePayload);
+        }
+    }
+
+    public void sendMessageAfterStandardDelay(final String messagePayload, final FriendlyMessage.MessageType messageType, final Boolean isBotMessage) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                sendMessageWithPayload(messagePayload, messageType, isBotMessage);
+            }
+        }, DEFAULT_AUTOREPLY_DELAY);
     }
 
     @Override
@@ -277,7 +311,7 @@ public class IndividualChatActivity extends AppCompatActivity
 //    }
 
     public void onStartTTT(View view) {
-        sendMessageWithPayload("[]", FriendlyMessage.MessageType.TicTacToe, false);
+        sendMessageWithPayload("[]", TicTacToe, false);
     }
 
     //AddOn View ---added by disha
