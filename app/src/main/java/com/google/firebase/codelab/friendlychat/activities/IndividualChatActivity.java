@@ -23,7 +23,6 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,9 +37,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -52,6 +49,7 @@ import com.google.firebase.codelab.friendlychat.adapters.ViewPagerAdapter;
 import com.google.firebase.codelab.friendlychat.chatAddons.MessageViewHolder;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.MovieFragment;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.TrailerFragment;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.helpers.NestedScrollableViewHelper;
 import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.fragments.TicTacToeFragment;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
 import com.google.firebase.codelab.friendlychat.utilities.AddonsProtocols;
@@ -62,10 +60,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
-import com.google.firebase.codelab.friendlychat.chatAddons.movie.helpers.NestedScrollableViewHelper;
 
 import static android.view.View.VISIBLE;
-import static android.widget.Toast.LENGTH_SHORT;
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.MESSAGES_FOR_GROUP_NODE;
 
 public class IndividualChatActivity extends AppCompatActivity
@@ -90,10 +86,10 @@ public class IndividualChatActivity extends AppCompatActivity
     private EditText mMessageEditText;
     private Boolean shouldAutoReply;
     private Integer lastIndex;
+    //AddOns
     private LinearLayout linearLayout;
     private LinearLayout linearLayout_fragment;
     private FrameLayout flMovieFragment;
-
     private Toolbar toolbar1;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -236,25 +232,9 @@ public class IndividualChatActivity extends AppCompatActivity
         });
     }
 
-    private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
-    }
-
-
     @Override
     public void onPreviewFragmentInteraction() {
     }
-
-    //added by disha
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MovieFragment(), "Movies");
-        adapter.addFragment(new TicTacToeFragment(), "TicTacToe");
-        viewPager.setAdapter(adapter);
-    }
-
 
     public void sendAutoReplyForMessageAtIndex(int index) {
         if (lastIndex != null && lastIndex == index - 1 && shouldAutoReply) {
@@ -274,10 +254,6 @@ public class IndividualChatActivity extends AppCompatActivity
         ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
     }
 
-    @Override
-    public void onSpecialMessageAdded() {
-        CancelTrailers(getCurrentFocus());
-    }
 
 
     //
@@ -304,26 +280,14 @@ public class IndividualChatActivity extends AppCompatActivity
         sendMessageWithPayload("[]", FriendlyMessage.MessageType.TicTacToe, false);
     }
 
-    public void onAddTrailor(View view) {
+    //AddOn View ---added by disha
+
+    public void onAdd(View view) {
         linearLayout.setVisibility(View.INVISIBLE);
         setAddonView();
         animateAddonView();
         setSlidingPanel();
-        if(slidingLayout != null){
-            Toast.makeText(this,slidingLayout.getPanelState().toString(),LENGTH_SHORT).show();
-
         }
-
-
-        /*
-        // Begin the transaction
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-// Replace the contents of the container with the new fragment
-        ft.replace(R.id.flMovieFragment, new MovieFragment(),"movies");
-// Complete the changes added above
-        ft.commit();
-        */
-    }
 
     private void setSlidingPanel() {
 
@@ -334,7 +298,6 @@ public class IndividualChatActivity extends AppCompatActivity
         slidingLayout = (SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
         NestedScrollableViewHelper nsv = new NestedScrollableViewHelper();
         nsv.setScrollableView(findViewById(R.id.gvTrailor));
-
         slidingLayout.setAnchorPoint(0.5f);
         slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
         slidingLayout.setFadeOnClickListener(new View.OnClickListener() {
@@ -372,6 +335,11 @@ public class IndividualChatActivity extends AppCompatActivity
 
     }
 
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+    }
+
     private void animateAddonView() {
         viewPager.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
@@ -396,41 +364,31 @@ public class IndividualChatActivity extends AppCompatActivity
 
     }
 
-
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MovieFragment(), "Movies");
+        adapter.addFragment(new TicTacToeFragment(), "TicTacToe");
+        viewPager.setAdapter(adapter);
+    }
+    @Override
+    public void onSpecialMessageAdded() {
+        CancelTrailers(getCurrentFocus());
+    }
     public void CancelTrailers(View view) {
         slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
-        /*
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-
-        ft.remove(getSupportFragmentManager().findFragmentById(R.id.flMovieFragment));
-        ft.commit();
-
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
-        lp.addRule(RelativeLayout.CENTER_HORIZONTAL,0);
-        lp.addRule(RelativeLayout.CENTER_VERTICAL,0);
-        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        linearLayout.setLayoutParams(lp);*/
     }
 
-    public void CancelPreview(View view){
+    /*public void CancelPreview(View view){
         if(getSupportFragmentManager().findFragmentByTag("preview") != null){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
             ft.remove(getSupportFragmentManager().findFragmentByTag("preview"));
             ft.commit();
         }
-    }
+    }*/
 
     public void ExpandTrailerView(View view) {
-
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) linearLayout.getLayoutParams();
-        lp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM,0);
-        linearLayout.setLayoutParams(lp);
-
-        RelativeLayout.LayoutParams lpf = (RelativeLayout.LayoutParams) linearLayout_fragment.getLayoutParams();
-        lpf.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-        lpf.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-        linearLayout_fragment.setLayoutParams(lpf);
+        slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
     }
 
     @Override
