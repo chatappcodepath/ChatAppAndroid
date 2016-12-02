@@ -9,9 +9,7 @@
     tools:context=".activities.LaunchChatsActivity">
 
     <include
-        layout="@layout/toolbar_main"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        layout="@layout/toolbar_main" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvChats"
@@ -26,6 +24,7 @@
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:transitionName="firstlastname"
         android:layout_gravity="bottom|end"
         android:layout_marginBottom="@dimen/border_margin"
         android:layout_marginRight="@dimen/border_margin"

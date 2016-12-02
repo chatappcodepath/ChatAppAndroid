@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="ToolbarTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
         <item name="android:textColorPrimary">@android:color/white</item>
         <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
@@ -18,7 +18,6 @@
 
         <item name="selectableItemBackground">?android:selectableItemBackground</item>
         <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
-
     </style>
 
     <style name="general_background">
@@ -35,6 +34,10 @@
         <item name="android:background">?attr/myColorPrimary</item>
     </style>
 
+    <style name="menuTextApearance" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
     <style name="tv_toolbar">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/textsize_header</item>
@@ -49,13 +52,6 @@
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
-    <style name="tv_contacts">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">@dimen/textsize_header</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:gravity">center</item>
-    </style>
-
     <style name="tv_trailer">
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
@@ -68,18 +64,6 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:gravity">center</item>
         <item name="android:maxLines">2</item>
-    </style>
-
-    <!-- <style name="fab_sign_in">
-        <item name="app:backgroundTint" tools:targetApi="lollipop">@color/colorPrimary</item>
-    </style> -->
-
-    <style name="ib_back_contacts">
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
-    <style name="ib_create_contacts">
-        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="ib_trailer1">

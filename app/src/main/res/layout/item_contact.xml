@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/border_margin"
+    android:padding="@dimen/small_spacing"
     tools:targetApi="ice_cream_sandwich">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivProfileImageContacts"
         android:layout_width="@dimen/standard_contact_image_size"
         android:layout_height="@dimen/standard_contact_image_size"
