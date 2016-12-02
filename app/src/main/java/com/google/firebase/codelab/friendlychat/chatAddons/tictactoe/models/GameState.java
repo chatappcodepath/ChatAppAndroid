@@ -126,6 +126,18 @@ public class GameState {
         return TicTacToeConstants.GameResultState.LOSE;
     }
 
+    public String getAutomaticMove(String sid) {
+        //find empty spot
+        for(int i=0; i<currentTileState.length; i++) {
+            if (currentTileState[i] == TicTacToeConstants.TILE_STATE_EMPTY) {
+                if (updateGameState(sid, i)) {
+                    return getJsonPayload();
+                }
+            }
+        }
+        return null;
+    }
+
     public Boolean updateGameState(String sid, int position) {
         if (currentTileState[position] != TicTacToeConstants.TILE_STATE_EMPTY) {
             return false;
