@@ -32,6 +32,7 @@
         <item name="gridViewStyling">@style/gridview_style</item>
         <item name="ivOverlay">@style/iv_overlay_trailer</item>
         <item name="ibCancelTrailer">@style/ib_cancel_trailer</item>
+        <item name="android:windowActionBarOverlay">true</item>
     </style>
 
 </resources>

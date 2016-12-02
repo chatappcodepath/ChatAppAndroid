@@ -28,4 +28,11 @@
     <string name="timestamp">Timestamp</string>
     <string name="lastcomment">You: Last chat comment by you</string>
     <string name="poster_image">poster Image</string>
+
+    <!--addonview -->
+    <string-array name="listArray">
+        <item>Headings</item>
+        <item>Headings and Details</item>
+        <item>All Data</item>
+    </string-array>
 </resources>

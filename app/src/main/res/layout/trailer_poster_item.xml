@@ -17,6 +17,7 @@
     <TextView
         android:id="@+id/tvTrailerTitle"
         style="@style/tv_poster_item"
+        android:maxLines="1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         tools:text="sampletest" />
