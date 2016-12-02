@@ -9,6 +9,7 @@
     <dimen name="tv_trailer_ht">30dp</dimen>
     <dimen name="overlay_top_margin">33dp</dimen>
     <dimen name="rv_top_margin">60dp</dimen>
+    <dimen name="rv_bottom_margin">72dp</dimen>
     <dimen name="tv_signin_margin">80dp</dimen>
 
     <dimen name="textsize_small">13sp</dimen>
@@ -21,5 +22,12 @@
     <dimen name="standard_poster_image_size">100dp</dimen>
     <dimen name="standard_trailers_size">150dp</dimen>
     <dimen name="standard_movie_preview_size">200dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines.(added by disha) -->
+
+    <dimen name="tab_max_width">264dp</dimen>
+    <dimen name="tab_padding_bottom">16dp</dimen>
+    <dimen name="tab_label">14sp</dimen>
+    <dimen name="custom_tab_layout_height">72dp</dimen>
 
 </resources>

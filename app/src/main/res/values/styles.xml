@@ -128,4 +128,27 @@
     <style name="text_regular">
         <item name="android:textSize">@dimen/textsize_regular</item>
     </style>
+
+    <style name="appbar" >
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+        <item name="android:textSize">@dimen/textsize_regular</item>
+        <item name="tabIndicatorColor">@color/colorHighlight</item>
+        <item name="tabIndicatorHeight">2dp</item>
+
+
+
+    </style>
+
+    <!-- Added by disha -->
+
+    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
 </resources>

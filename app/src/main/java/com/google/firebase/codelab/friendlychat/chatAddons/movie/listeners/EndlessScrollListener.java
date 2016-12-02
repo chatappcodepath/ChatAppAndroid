@@ -1,4 +1,4 @@
-package com.google.firebase.codelab.friendlychat.chatAddons.movie.listeners.EndlessScrollListener;
+package com.google.firebase.codelab.friendlychat.chatAddons.movie.listeners;
 
 /**
  * Created by Disha

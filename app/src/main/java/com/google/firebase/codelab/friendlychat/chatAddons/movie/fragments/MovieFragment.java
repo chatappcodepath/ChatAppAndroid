@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.codelab.friendlychat.R;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.MovieNetworkClient;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.adapter.TrailerGridAdapter;
-import com.google.firebase.codelab.friendlychat.chatAddons.movie.listeners.EndlessScrollListener.EndlessScrollListener;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.listeners.EndlessScrollListener;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Trailer;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
