@@ -34,6 +34,7 @@ public class FriendlyMessage {
     private MessageType msgType;
     private String payLoad;
     private Boolean isBotMessage;
+    private Boolean isMine;
     private Long ts;
 
     /**
@@ -59,9 +60,10 @@ public class FriendlyMessage {
         this.msgType = msgType;
         this.isBotMessage = false;
         this.ts = (new Date()).getTime();
+        this.isMine = false;
     }
 
-    public FriendlyMessage(String text, String name, String photoUrl, MessageType msgType, Boolean isBotMessage) {
+    public FriendlyMessage(String text, String name, String photoUrl, MessageType msgType, Boolean isBotMessage,Boolean isMine) {
         this.payLoad = text;
         this.name = name;
         this.photoUrl = photoUrl;
@@ -69,6 +71,7 @@ public class FriendlyMessage {
         this.msgType = msgType;
         this.isBotMessage = isBotMessage;
         this.ts = (new Date()).getTime();
+        this.isMine = isMine;
     }
 
     public String getMid() {
@@ -125,6 +128,13 @@ public class FriendlyMessage {
 
     public void setIsBotMessage(Boolean botMessage) {
         isBotMessage = botMessage;
+    }
+
+    public Boolean getIsMine() {
+        return isMine;
+    }
+    public void setisMine(boolean isMine) {
+        this.isMine = isMine;
     }
 
     @Exclude
