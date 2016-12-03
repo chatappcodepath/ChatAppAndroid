@@ -170,6 +170,7 @@ public class FirebaseClient {
     public void updateGroupRefsAndSendNotifications(String groupID, FriendlyMessage messageToSend) {
         DatabaseReference groupReference = mFirebaseDatabaseReference.child(GROUPS_NODE).child(groupID);
         groupReference.child("lmSnippet").setValue(messageToSend.getPayLoad());
+        groupReference.child("messageType").setValue(messageToSend.getMsgType());
         groupReference.child("ts").setValue(messageToSend.getTs());
         sendNotificationForGroup(groupID, messageToSend);
     }

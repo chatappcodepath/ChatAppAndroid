@@ -50,9 +50,9 @@ import com.google.firebase.codelab.friendlychat.adapters.ViewPagerAdapter;
 import com.google.firebase.codelab.friendlychat.chatAddons.MessageViewHolder;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.MovieFragment;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.TrailerFragment;
-import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameState;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.helpers.NestedScrollableViewHelper;
 import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.fragments.TicTacToeFragment;
+import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameState;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
 import com.google.firebase.codelab.friendlychat.utilities.AddonsProtocols;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
@@ -62,11 +62,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
+
+import static android.view.View.VISIBLE;
 import static com.google.firebase.codelab.friendlychat.models.FriendlyMessage.MessageType.TicTacToe;
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.MESSAGES_FOR_GROUP_NODE;
-import static android.view.View.VISIBLE;
 public class IndividualChatActivity extends AppCompatActivity
-        implements AddonsProtocols.AddonsListener,TrailerFragment.PreviewIFragmentnteractionListener {
+        implements AddonsProtocols.AddonsListener, TicTacToeFragment.TicTacToeFragmentListener,
+        TrailerFragment.PreviewIFragmentnteractionListener {
 
     public static final String INTENT_GROUP_KEY = "groupKey";
     public static final String INTENT_GROUP_TITLE = "groupTitle";
@@ -153,6 +155,7 @@ public class IndividualChatActivity extends AppCompatActivity
 
         // Initialize ProgressBar and RecyclerView.
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+        mProgressBar.setVisibility(View.INVISIBLE);
         mMessageRecyclerView = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
@@ -288,8 +291,6 @@ public class IndividualChatActivity extends AppCompatActivity
         ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
     }
 
-
-
     //
 //    public void onFragmentInteraction(int requestCode, int resultCode, Intent intent) {
 //
@@ -309,10 +310,6 @@ public class IndividualChatActivity extends AppCompatActivity
 //            CancelTrailers(this.getCurrentFocus());
 //        }
 //    }
-
-    public void onStartTTT(View view) {
-        sendMessageWithPayload("[]", TicTacToe, false);
-    }
 
     //AddOn View ---added by disha
 
@@ -451,4 +448,8 @@ public class IndividualChatActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void startNewTTTGame() {
+        sendMessageWithPayload("[]", TicTacToe, false);
+    }
 }

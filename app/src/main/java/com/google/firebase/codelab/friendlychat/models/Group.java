@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class Group {
     String lmSnippet;
+    String messageType;
     String title;
     Long ts;
     String id;
@@ -119,5 +120,13 @@ public class Group {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getMessageType() {
+        return messageType;
+    }
+
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
     }
 }
