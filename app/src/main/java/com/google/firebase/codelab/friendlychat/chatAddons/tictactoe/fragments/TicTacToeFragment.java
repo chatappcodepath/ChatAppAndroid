@@ -4,18 +4,36 @@ package com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.fragments;
  * Created by Disha on 11/30/16.
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.firebase.codelab.friendlychat.R;
 
 public class TicTacToeFragment extends Fragment{
 
+    public interface TicTacToeFragmentListener {
+        public void startNewTTTGame();
+    }
+
+    private TicTacToeFragmentListener mTicTacToeFragmentListener;
+
     public TicTacToeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof TicTacToeFragmentListener) {
+            mTicTacToeFragmentListener = (TicTacToeFragmentListener) context;
+        } else {
+            throw new ClassCastException(context.toString() + "must implement TicTacToeFragment.TicTacToeFragmentListener");
+        }
     }
 
     @Override
@@ -27,7 +45,16 @@ public class TicTacToeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tictactoe, container, false);
+        View mainView = inflater.inflate(R.layout.fragment_tictactoe, container, false);
+        Button startGameButton = (Button) mainView.findViewById(R.id.startGame);
+        startGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mTicTacToeFragmentListener.startNewTTTGame();
+            }
+        });
+
+        return mainView;
     }
 
 }

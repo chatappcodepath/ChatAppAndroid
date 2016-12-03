@@ -59,6 +59,9 @@ public class GameState {
     }
 
     public GameMove getLastMove() {
+        if (moves.size() == 0) {
+            return null;
+        }
         return moves.get(moves.size() - 1);
     }
 
