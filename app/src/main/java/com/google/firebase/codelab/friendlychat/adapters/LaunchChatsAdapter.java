@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.codelab.friendlychat.R;
+import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
 import com.google.firebase.codelab.friendlychat.models.Group;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 
@@ -71,7 +72,8 @@ public class LaunchChatsAdapter extends RecyclerView.Adapter<LaunchChatsAdapter.
         String groupTitleString = currentGroup.getTitle().replace(currentUser.getDisplayName(), "");
         viewholder.tvChatContactName.setText(groupTitleString);
         viewholder.tvChatTimestamp.setText(currentGroup.getRelativeTimeStamp());
-        viewholder.tvChatLastComment.setText(currentGroup.getLastMessageSnippet());
+        String groupLastMessage = FriendlyMessage.getGroupTitleForMessage(currentGroup.getLastMessageSnippet(), currentGroup.getMessageType());
+        viewholder.tvChatLastComment.setText(groupLastMessage);
     }
 
     public void updateGroups(ArrayList<Group> newGroups) {
