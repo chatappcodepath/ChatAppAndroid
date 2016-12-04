@@ -63,7 +63,7 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
         if (friendlyMessage.getIsMine() != null) {
             if (friendlyMessage.getIsMine() == true) {
 
-                ivTrailerImage.setBackgroundResource(R.drawable.bubble3);
+                ivTrailerImage.setBackgroundResource(R.drawable.bubble2);
                 rlMovieMsg.setGravity(Gravity.RIGHT);
                 this.messengerImageView.setVisibility(View.GONE);
             }
