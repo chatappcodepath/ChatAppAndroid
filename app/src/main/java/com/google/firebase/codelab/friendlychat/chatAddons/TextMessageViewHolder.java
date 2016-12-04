@@ -57,7 +57,7 @@ public class TextMessageViewHolder extends MessageViewHolder {
             // If not mine then align to left
             else {
                 this.llTextMsg.setBackgroundResource(R.drawable.bubble1);
-
+                this.messageTextView.setTextColor(activityContext.getResources().getColor(R.color.colorPrimaryDark));
                 llTextMsg1.setOrientation(LinearLayout.HORIZONTAL);
                 ((LinearLayout.LayoutParams) this.llTextMsg.getLayoutParams()).gravity = Gravity.LEFT;
 
