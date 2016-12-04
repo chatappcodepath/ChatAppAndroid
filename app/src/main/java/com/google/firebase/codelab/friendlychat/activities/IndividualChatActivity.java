@@ -183,7 +183,7 @@ public class IndividualChatActivity extends AppCompatActivity
                 // of the list to show the newly added message.
                 if (lastVisiblePosition == -1 ||
                         (positionStart >= (friendlyMessageCount - 1) &&
-                                lastVisiblePosition == (positionStart - 1))) {
+                                lastVisiblePosition == (positionStart))) {
                     mMessageRecyclerView.scrollToPosition(positionStart);
                 }
             }
@@ -238,7 +238,8 @@ public class IndividualChatActivity extends AppCompatActivity
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text, false);
+
+                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text, false,true);
                 mMessageEditText.setText("");
             }
         });
@@ -259,7 +260,7 @@ public class IndividualChatActivity extends AppCompatActivity
                     !message.getIsBotMessage()) {
                 if (message.getMsgTypeAsEnum() == FriendlyMessage.MessageType.Text) {
                     String autoReplyText = ChatApplication.getAutoReplyClient().getResponseForText(message.getPayLoad());
-                    sendMessageAfterStandardDelay(autoReplyText, FriendlyMessage.MessageType.Text, true);
+                    sendMessageAfterStandardDelay(autoReplyText, FriendlyMessage.MessageType.Text, true,true);
                 }
                 lastProcessedMid = message.getMid();
             }
@@ -275,19 +276,20 @@ public class IndividualChatActivity extends AppCompatActivity
         }
     }
 
-    public void sendMessageAfterStandardDelay(final String messagePayload, final FriendlyMessage.MessageType messageType, final Boolean isBotMessage) {
+    public void sendMessageAfterStandardDelay(final String messagePayload, final FriendlyMessage.MessageType messageType, final Boolean isBotMessage,
+                                              final Boolean isMine) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendMessageWithPayload(messagePayload, messageType, isBotMessage);
+                sendMessageWithPayload(messagePayload, messageType, isBotMessage,isMine);
             }
         }, DEFAULT_AUTOREPLY_DELAY);
     }
 
     @Override
-    public void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType, Boolean isBotMessage) {
-        FriendlyMessage newMessage = new FriendlyMessage(messagePayload, mUsername, mPhotoUrl, messageType, isBotMessage);
+    public void sendMessageWithPayload(String messagePayload, FriendlyMessage.MessageType messageType, Boolean isBotMessage,Boolean isMine) {
+        FriendlyMessage newMessage = new FriendlyMessage(messagePayload, mUsername, mPhotoUrl, messageType, isBotMessage,isMine);
         ChatApplication.getFirebaseClient().sendMessageForGroup(currentGroupID, newMessage);
     }
 
@@ -310,6 +312,11 @@ public class IndividualChatActivity extends AppCompatActivity
 //            CancelTrailers(this.getCurrentFocus());
 //        }
 //    }
+
+
+    public void onStartTTT(View view) {
+        sendMessageWithPayload("[]", TicTacToe, false,true);
+    }
 
     //AddOn View ---added by disha
 
@@ -450,6 +457,6 @@ public class IndividualChatActivity extends AppCompatActivity
 
     @Override
     public void startNewTTTGame() {
-        sendMessageWithPayload("[]", TicTacToe, false);
+        sendMessageWithPayload("[]", TicTacToe, false,true);
     }
 }

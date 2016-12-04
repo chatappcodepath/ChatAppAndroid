@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -32,6 +34,7 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
     ImageView ivOverlay;
     Context activityContext;
     Movie movie;
+    RelativeLayout rlMovieMsg;
 
     public MovieMessageViewHolder(View itemView, Context activityContext) {
         super(itemView, activityContext);
@@ -40,7 +43,9 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
         ivOverlay = (ImageView) itemView.findViewById(R.id.ivOverlay);
         messengerTextView = (TextView) itemView.findViewById(R.id.messengerTextView);
         this.activityContext = activityContext;
+        rlMovieMsg=(RelativeLayout) itemView.findViewById(R.id.rlMovieMsg);
         itemView.setOnClickListener(this);
+
     }
 
     @Override
@@ -54,7 +59,20 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
     public void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage friendlyMessage, int position) {
         movie = Movie.getMovie(friendlyMessage.getPayLoad());
 
-        this.messengerTextView.setText(friendlyMessage.getName());
+      //  this.messengerTextView.setText(friendlyMessage.getName());
+        if (friendlyMessage.getIsMine() != null) {
+            if (friendlyMessage.getIsMine() == true) {
+
+                ivTrailerImage.setBackgroundResource(R.drawable.bubble2);
+                rlMovieMsg.setGravity(Gravity.RIGHT);
+                this.messengerImageView.setVisibility(View.GONE);
+            }
+            else{
+
+                ivTrailerImage.setBackgroundResource(R.drawable.bubble1);
+                rlMovieMsg.setGravity(Gravity.LEFT);
+            }
+        }
         if (friendlyMessage.getPhotoUrl() == null) {
             this.messengerImageView
                     .setImageDrawable(ContextCompat

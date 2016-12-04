@@ -133,7 +133,7 @@ public class MovieFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 final Movie movie = (Movie) parent.getItemAtPosition(position);
                 if (movie.getTrailerURL() != null) {
-                    mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
+                    mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false,true);
                     return;
                 }
                 Log.d(TAG, "Fetching Movie Trailer");
@@ -147,7 +147,7 @@ public class MovieFragment extends Fragment {
                         else {
                             Log.d(TAG, "Movie Fetched");
                             Toast.makeText(getContext(),"Video Added",Toast.LENGTH_SHORT).show();
-                            mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false);
+                            mListener.sendMessageWithPayload(movie.getJSONString(), FriendlyMessage.MessageType.Movie, false,true);
                             mListener.onSpecialMessageAdded();
                         }
                     }

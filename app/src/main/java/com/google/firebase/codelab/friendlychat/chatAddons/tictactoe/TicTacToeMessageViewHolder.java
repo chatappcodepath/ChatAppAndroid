@@ -3,10 +3,12 @@ package com.google.firebase.codelab.friendlychat.chatAddons.tictactoe;
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -44,6 +46,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
     private Context activityContext;
     private TileClickHandler mClickHandler;
     FriendlyMessage currentMessage;
+    TableLayout tlTicTacToe;
 
     public static final int[] GAME_TILE_IDS = { R.id.GameTile01,
             R.id.GameTile02, R.id.GameTile03, R.id.GameTile04, R.id.GameTile05,
@@ -57,6 +60,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
         setTilesDrawables(itemView);
         this.itemView = itemView;
         tvResult = (TextView) itemView.findViewById(R.id.tvResult);
+        tlTicTacToe=(TableLayout)itemView.findViewById(R.id.tableLayout1);
     }
 
 
@@ -116,6 +120,19 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
     public void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
         this.currentMessage = model;
         gameState = GameState.instanceFrom(model.getPayLoad());
+        if (model.getIsMine() != null) {
+            if (model.getIsMine() == true) {
+
+                tlTicTacToe.setBackgroundResource(R.drawable.bubble2);
+                tlTicTacToe.setGravity(Gravity.RIGHT);
+                this.messengerImageView.setVisibility(View.GONE);
+            }
+            else{
+
+                tlTicTacToe.setBackgroundResource(R.drawable.bubble1);
+                tlTicTacToe.setGravity(Gravity.LEFT);
+            }
+        }
         if (model.getPhotoUrl() == null) {
             this.messengerImageView
                     .setImageDrawable(ContextCompat
