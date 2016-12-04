@@ -123,7 +123,7 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
         if (model.getIsMine() != null) {
             if (model.getIsMine() == true) {
 
-                tlTicTacToe.setBackgroundResource(R.drawable.bubble3);
+                tlTicTacToe.setBackgroundResource(R.drawable.bubble2);
                 tlTicTacToe.setGravity(Gravity.RIGHT);
                 this.messengerImageView.setVisibility(View.GONE);
             }
