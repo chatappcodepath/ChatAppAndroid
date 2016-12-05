@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.firebase.codelab.friendlychat.R;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
+import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 
 /**
  * Created by patelkev on 11/19/16.
@@ -46,8 +47,8 @@ public class TextMessageViewHolder extends MessageViewHolder {
         // this.messengerTextView.setText(friendlyMessage.getName());
 
 
-        if (friendlyMessage.getIsMine() != null) {
-            if (friendlyMessage.getIsMine() == true) {
+        if (friendlyMessage.getSid() != null) {
+            if (friendlyMessage.getSid().equalsIgnoreCase(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid())) {
                 llTextMsg.setBackgroundResource(R.drawable.bubble3);
                 this.messageTextView.setTextColor(activityContext.getResources().getColor(R.color.white));
                 llTextMsg1.setOrientation(LinearLayout.VERTICAL);

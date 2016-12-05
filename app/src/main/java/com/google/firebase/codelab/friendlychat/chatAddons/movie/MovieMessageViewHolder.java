@@ -18,6 +18,7 @@ import com.google.firebase.codelab.friendlychat.R;
 import com.google.firebase.codelab.friendlychat.chatAddons.MessageViewHolder;
 import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
+import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 
 /**
  * Created by patelkev on 11/19/16.
@@ -60,8 +61,8 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
         movie = Movie.getMovie(friendlyMessage.getPayLoad());
 
       //  this.messengerTextView.setText(friendlyMessage.getName());
-        if (friendlyMessage.getIsMine() != null) {
-            if (friendlyMessage.getIsMine() == true) {
+        if (friendlyMessage.getSid() != null) {
+            if (friendlyMessage.getSid().equalsIgnoreCase(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid())) {
 
                 ivTrailerImage.setBackgroundResource(R.drawable.bubble2);
                 rlMovieMsg.setGravity(Gravity.RIGHT);
