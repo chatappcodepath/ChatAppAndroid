@@ -101,23 +101,33 @@
         <ImageButton
             android:id="@+id/ibAddTrailor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:onClick="onAdd"
-            android:src="@android:drawable/ic_menu_add" />
+            android:padding="@dimen/small_spacing"
+            android:src="@drawable/ic_add"
+            android:background="@android:color/transparent"/>
 
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="@dimen/zero_dimen"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1" />
+            android:layout_height="40dp"
+            android:layout_margin="@dimen/small_spacing"
+            android:background="@drawable/message_field"
+            android:hint="Type here..."
+            android:padding="@dimen/border_margin"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimary"/>
 
-        <Button
-            android:id="@+id/sendButton"
+        <ImageButton
+            android:id="@+id/sendButton1"
+            android:src="@drawable/ic_send_button"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
+            android:padding="@dimen/small_spacing"
+            android:background="@android:color/transparent"
             android:enabled="false"
-            android:text="@string/send" />
+            android:clickable="false"
+            tools:text="@string/send" />
     </LinearLayout>
 
 

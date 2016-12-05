@@ -6,6 +6,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,13 +23,15 @@ import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 
 public class TextMessageViewHolder extends MessageViewHolder {
 
-    public static int layoutID = R.layout.item_message_text;
 
+    public static int layoutID = R.layout.item_message_text;
+    private int lastPosition = -1;
     TextView messageTextView;
     TextView messengerTextView;
     ImageView messengerImageView;
     LinearLayout llTextMsg;
-    LinearLayout llTextMsg1;
+    LinearLayout llTextMsg1;;
+    Animation animBounce;
 
     public TextMessageViewHolder(View itemView, Context activityContext) {
         super(itemView, activityContext);
@@ -36,21 +40,22 @@ public class TextMessageViewHolder extends MessageViewHolder {
         messengerImageView = (ImageView) itemView.findViewById(R.id.messengerImageView);
         llTextMsg = (LinearLayout) itemView.findViewById(R.id.llTextMessage_parent);
         llTextMsg1 = (LinearLayout) itemView.findViewById(R.id.llTextmsg_parent1);
+
     }
 
     @Override
     public void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage friendlyMessage, int position) {
 
         this.messageTextView.setText(friendlyMessage.getPayLoad());
-
-
+        animBounce= AnimationUtils.loadAnimation(viewHolder.activityContext,R.anim.animation);
         // this.messengerTextView.setText(friendlyMessage.getName());
-
+        setAnimation(llTextMsg, position);
 
         if (friendlyMessage.getSid() != null) {
             if (friendlyMessage.getSid().equalsIgnoreCase(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid())) {
                 llTextMsg.setBackgroundResource(R.drawable.bubble3);
                 this.messageTextView.setTextColor(activityContext.getResources().getColor(R.color.white));
+                // start the animation
                 llTextMsg1.setOrientation(LinearLayout.VERTICAL);
                 ((LinearLayout.LayoutParams) llTextMsg.getLayoutParams()).gravity = Gravity.RIGHT;
                 this.messengerImageView.setVisibility(View.GONE);
@@ -59,6 +64,7 @@ public class TextMessageViewHolder extends MessageViewHolder {
             else {
                 this.llTextMsg.setBackgroundResource(R.drawable.bubble1);
                 this.messageTextView.setTextColor(activityContext.getResources().getColor(R.color.colorPrimaryDark));
+
                 llTextMsg1.setOrientation(LinearLayout.HORIZONTAL);
                 ((LinearLayout.LayoutParams) this.llTextMsg.getLayoutParams()).gravity = Gravity.LEFT;
 
@@ -76,6 +82,17 @@ public class TextMessageViewHolder extends MessageViewHolder {
 
             }
 
+        }
+    }
+
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(), R.anim.animation);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
         }
     }
 
