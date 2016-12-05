@@ -41,7 +41,6 @@
                 tools:text="Hi how are you"
                 android:layout_margin="@dimen/small_spacing"
                 android:maxEms="12"
-
                 android:textAppearance="@style/text_regular" />
 
             <!--<TextView
