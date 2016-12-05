@@ -65,6 +65,7 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         final String currentUserName = ChatApplication.getFirebaseClient().getmFirebaseUser().getDisplayName();
         TextView mTitle = (TextView) findViewById(R.id.toolbar_title);

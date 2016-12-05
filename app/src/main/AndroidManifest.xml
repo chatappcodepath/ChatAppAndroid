@@ -9,9 +9,9 @@
     <application
         android:name=".utilities.ChatApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/lz_bubbles"
         android:supportsRtl="true"
-        android:label=""
+        android:label="LzChat"
         android:theme="@style/Theme.CHATAPP_THEME">
         <activity android:name=".activities.IndividualChatActivity"/>
         <activity android:name=".activities.SignInActivity">

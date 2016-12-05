@@ -64,6 +64,8 @@ public class SignInActivity extends AppCompatActivity implements
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         TextView mTitle = (TextView)findViewById(R.id.toolbar_title);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
         mTitle.setTypeface(font);

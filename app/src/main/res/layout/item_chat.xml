@@ -49,12 +49,12 @@
         android:id="@+id/tvLastCommentChat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/ivProfileImageChat"
         android:layout_alignParentRight="true"
         android:layout_below="@id/llNameTime"
         android:layout_toRightOf="@id/ivProfileImageChat"
         android:ellipsize="end"
         android:scrollHorizontally="true"
         android:textAppearance="@style/text_email"
+        android:layout_marginBottom="@dimen/small_spacing"
         tools:text="@string/lastcomment" />
 </RelativeLayout>
