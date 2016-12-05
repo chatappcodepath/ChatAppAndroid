@@ -17,6 +17,7 @@ import com.google.firebase.codelab.friendlychat.chatAddons.MessageViewHolder;
 import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameMove;
 import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameState;
 import com.google.firebase.codelab.friendlychat.models.FriendlyMessage;
+import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 
 import java.util.ArrayList;
 
@@ -120,8 +121,8 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
     public void populateViewHolder(MessageViewHolder viewHolder, FriendlyMessage model, int position) {
         this.currentMessage = model;
         gameState = GameState.instanceFrom(model.getPayLoad());
-        if (model.getIsMine() != null) {
-            if (model.getIsMine() == true) {
+        if (model.getSid() != null) {
+            if (model.getSid().equalsIgnoreCase(ChatApplication.getFirebaseClient().getmFirebaseUser().getUid())) {
 
                 tlTicTacToe.setBackgroundResource(R.drawable.bubble2);
                 tlTicTacToe.setGravity(Gravity.RIGHT);
@@ -131,18 +132,21 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
 
                 tlTicTacToe.setBackgroundResource(R.drawable.bubble1);
                 tlTicTacToe.setGravity(Gravity.LEFT);
+                if (model.getPhotoUrl() == null) {
+                    this.messengerImageView
+                            .setImageDrawable(ContextCompat
+                                    .getDrawable(activityContext,
+                                            R.drawable.ic_vector_account));
+                } else {
+                    Glide.with(activityContext)
+                            .load(model.getPhotoUrl())
+                            .into(this.messengerImageView);
             }
+                this.messengerImageView.setVisibility(View.VISIBLE);
         }
-        if (model.getPhotoUrl() == null) {
-            this.messengerImageView
-                    .setImageDrawable(ContextCompat
-                            .getDrawable(activityContext,
-                                    R.drawable.ic_vector_account));
-        } else {
-            Glide.with(activityContext)
-                    .load(model.getPhotoUrl())
-                    .into(this.messengerImageView);
+
         }
+
         this.populateAllTiles();
         this.populateTVResult();
     }

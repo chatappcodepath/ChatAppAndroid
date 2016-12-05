@@ -239,7 +239,7 @@ public class IndividualChatActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
 
-                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text, false,true);
+                sendMessageWithPayload(mMessageEditText.getText().toString(), FriendlyMessage.MessageType.Text, false,false);
                 mMessageEditText.setText("");
             }
         });
