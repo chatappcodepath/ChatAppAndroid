@@ -72,9 +72,7 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
 
                 ivTrailerImage.setBackgroundResource(R.drawable.bubble1);
                 rlMovieMsg.setGravity(Gravity.LEFT);
-            }
-        }
-        if (friendlyMessage.getPhotoUrl() == null) {
+                if (friendlyMessage.getPhotoUrl() == null) {
             this.messengerImageView
                     .setImageDrawable(ContextCompat
                             .getDrawable(activityContext,
@@ -84,7 +82,10 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
                     .load(friendlyMessage.getPhotoUrl())
                     .into(this.messengerImageView);
         }
-
+          this.messengerImageView.setVisibility(View.VISIBLE);
+            }
+        }
+        
         Glide.with(activityContext)
                 .load(movie.getPoster_path())
                 .fitCenter().centerCrop().
