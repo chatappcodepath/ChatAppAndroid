@@ -132,10 +132,8 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
 
                 tlTicTacToe.setBackgroundResource(R.drawable.bubble1);
                 tlTicTacToe.setGravity(Gravity.LEFT);
-            }
-        }
-        if (model.getPhotoUrl() == null) {
-            this.messengerImageView
+                if (model.getPhotoUrl() == null) {
+                this.messengerImageView
                     .setImageDrawable(ContextCompat
                             .getDrawable(activityContext,
                                     R.drawable.ic_vector_account));
@@ -144,6 +142,10 @@ public class TicTacToeMessageViewHolder extends MessageViewHolder {
                     .load(model.getPhotoUrl())
                     .into(this.messengerImageView);
         }
+                 this.messengerImageView.setVisibility(View.VISIBLE);
+            }
+        }
+        
         this.populateAllTiles();
         this.populateTVResult();
     }
