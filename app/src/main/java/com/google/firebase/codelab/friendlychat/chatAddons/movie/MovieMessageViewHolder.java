@@ -73,20 +73,19 @@ public class MovieMessageViewHolder extends MessageViewHolder implements View.On
                 ivTrailerImage.setBackgroundResource(R.drawable.bubble1);
                 rlMovieMsg.setGravity(Gravity.LEFT);
                 if (friendlyMessage.getPhotoUrl() == null) {
-                    this.messengerImageView
-                            .setImageDrawable(ContextCompat
-                                    .getDrawable(activityContext,
-                                            R.drawable.ic_vector_account));
-                } else {
-                    Glide.with(activityContext)
-                            .load(friendlyMessage.getPhotoUrl())
-                            .into(this.messengerImageView);
-                }
-                this.messengerImageView.setVisibility(View.VISIBLE);
-
+            this.messengerImageView
+                    .setImageDrawable(ContextCompat
+                            .getDrawable(activityContext,
+                                    R.drawable.ic_vector_account));
+        } else {
+            Glide.with(activityContext)
+                    .load(friendlyMessage.getPhotoUrl())
+                    .into(this.messengerImageView);
+        }
+          this.messengerImageView.setVisibility(View.VISIBLE);
             }
         }
-
+        
         Glide.with(activityContext)
                 .load(movie.getPoster_path())
                 .fitCenter().centerCrop().
