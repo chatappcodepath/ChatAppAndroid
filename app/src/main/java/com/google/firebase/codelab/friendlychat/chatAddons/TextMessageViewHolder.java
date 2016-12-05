@@ -72,6 +72,7 @@ public class TextMessageViewHolder extends MessageViewHolder {
                             .load(friendlyMessage.getPhotoUrl())
                             .into(this.messengerImageView);
                 }
+                this.messengerImageView.setVisibility(View.VISIBLE);
 
             }
 
