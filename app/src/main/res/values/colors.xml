@@ -8,6 +8,7 @@
     <!--added by disha -->
 
         <color name="textColorPrimary">#FFFFFF</color>
+        <color name="textColorSecondary">#AAA</color>
         <color name="windowBackground">#FFFFFF</color>
         <color name="navigationBarColor">#000000</color>
         <color name="colorHighlight">#FFEB3B</color>
