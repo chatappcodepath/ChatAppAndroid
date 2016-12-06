@@ -33,9 +33,9 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -83,7 +83,7 @@ public class IndividualChatActivity extends AppCompatActivity
     private SharedPreferences mSharedPreferences;
     private GoogleApiClient mGoogleApiClient;
     private String currentGroupID;
-    private Button mSendButton;
+    private ImageButton mSendButton;
     private RecyclerView mMessageRecyclerView;
     private LinearLayoutManager mLinearLayoutManager;
     private ProgressBar mProgressBar;
@@ -91,6 +91,7 @@ public class IndividualChatActivity extends AppCompatActivity
     private Boolean shouldAutoReply;
     private String lastProcessedMid;
     private Integer lastIndex;
+
     //AddOns
     private LinearLayout linearLayout;
     private LinearLayout linearLayout_fragment;
@@ -184,8 +185,11 @@ public class IndividualChatActivity extends AppCompatActivity
                 if (lastVisiblePosition == -1 ||
                         (positionStart >= (friendlyMessageCount - 1) &&
                                 lastVisiblePosition == (positionStart))) {
-                    mMessageRecyclerView.scrollToPosition(positionStart);
+                  mMessageRecyclerView.scrollToPosition(positionStart);
+                    //mMessageRecyclerView.smoothScrollToPosition(positionStart);
+
                 }
+
             }
 
             @Override
@@ -211,8 +215,10 @@ public class IndividualChatActivity extends AppCompatActivity
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().length() > 0) {
                     mSendButton.setEnabled(true);
+                    mSendButton.setImageDrawable(getDrawable(R.drawable.ic_send_button1));
                 } else {
                     mSendButton.setEnabled(false);
+                    mSendButton.setImageDrawable(getDrawable(R.drawable.ic_send_button));
                 }
             }
 
@@ -234,7 +240,7 @@ public class IndividualChatActivity extends AppCompatActivity
             }
         });
 
-        mSendButton = (Button) findViewById(R.id.sendButton);
+        mSendButton = (ImageButton) findViewById(R.id.sendButton1);
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
