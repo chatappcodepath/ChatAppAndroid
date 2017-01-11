@@ -1,35 +1,35 @@
 {
   "project_info": {
-    "project_number": "990072877637",
-    "firebase_url": "https://friendlychat-28062.firebaseio.com",
-    "project_id": "friendlychat-28062",
-    "storage_bucket": "friendlychat-28062.appspot.com"
+    "project_number": "555626995561",
+    "firebase_url": "https://lzchat-c537f.firebaseio.com",
+    "project_id": "lzchat-c537f",
+    "storage_bucket": "lzchat-c537f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:990072877637:android:b5d75907de594a2d",
+        "mobilesdk_app_id": "1:555626995561:android:b5d75907de594a2d",
         "android_client_info": {
           "package_name": "com.google.firebase.codelab.friendlychat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "990072877637-cjvj73qmj43j2r09cbjj1k5uj5q7tq6d.apps.googleusercontent.com",
+          "client_id": "555626995561-gtvrc1pqpbsfpo39cabd2dtnhp20k8q3.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.google.firebase.codelab.friendlychat",
-            "certificate_hash": "2730D6A5CAB31ACEBA4BB80D5CB52C9496890C7D"
+            "certificate_hash": "6275EC092C5A25B56C9D427041C8A74EAF990561"
           }
         },
         {
-          "client_id": "990072877637-bb5dd1vmhjjifqken9tuhoglmc6e404t.apps.googleusercontent.com",
+          "client_id": "555626995561-hg62965l2tl6r2tjeo8svmo54aoutsi8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDxzD4R8aaiVQofIRwAODiRh1VN67go578"
+          "current_key": "AIzaSyA8FLLE-I5RWRtOmJPiXaK4WGVQ2igVjcM"
         }
       ],
       "services": {
@@ -40,8 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "990072877637-bb5dd1vmhjjifqken9tuhoglmc6e404t.apps.googleusercontent.com",
+              "client_id": "555626995561-hg62965l2tl6r2tjeo8svmo54aoutsi8.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "555626995561-0o3mp2d30k4krfuk3pm5nlt9a1d79qih.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lzchat.LZChat"
+              }
             }
           ]
         },

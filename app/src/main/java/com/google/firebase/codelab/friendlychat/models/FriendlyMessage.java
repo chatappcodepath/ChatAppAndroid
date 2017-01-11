@@ -16,8 +16,6 @@
 package com.google.firebase.codelab.friendlychat.models;
 
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
-import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameState;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 import com.google.firebase.database.Exclude;
 
@@ -148,24 +146,6 @@ public class FriendlyMessage {
         String groupTitle = messagePayload;
         if (messagePayload == null) {
             return "Say Something !! Break the ICE";
-        }
-        switch (messageType) {
-            case "Movie":
-                Movie movie = Movie.getMovie(messagePayload);
-                if (movie.getTitle() != null) {
-                    groupTitle = movie.getTitle();
-                }
-                break;
-            case "TicTacToe":
-                GameState gameState = GameState.instanceFrom(messagePayload);
-                if (gameState.getLastMove() != null) {
-                    groupTitle = "Tic Tac Toe game";
-                } else {
-                    groupTitle = "New Tic Tac Toe game";
-                }
-                break;
-            default:
-                groupTitle = messagePayload;
         }
         return groupTitle;
     }
