@@ -12,10 +12,23 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * "-KaEXc22uMkedGm1mgKO" : {
+ "isBotMessage" : false,
+ "mid" : "-KaEXc22uMkedGm1mgKO",
+ "msgType" : "Text",
+ "name" : "Kevin Patel",
+ "payLoad" : "Hi",
+ "photoUrl" : "https://lh6.googleusercontent.com/-cxMARBNR46g/AAAAAAAAAAI/AAAAAAAAALw/YJIFmViOKwE/s96-c/photo.jpg",
+ "sid" : "AjVfqUA4a0UciE7RhKiFr8MTEr73",
+ "ts" : 1484171935992
+ }
  */
 package com.google.firebase.codelab.friendlychat.models;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.codelab.friendlychat.chatAddons.movie.models.Movie;
+import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models.GameState;
 import com.google.firebase.codelab.friendlychat.utilities.ChatApplication;
 import com.google.firebase.database.Exclude;
 
@@ -27,13 +40,13 @@ public class FriendlyMessage {
         Movie, Text, TicTacToe, Sentinel
     }
 
-    private String name;
-    private String photoUrl;
-    private String sid;
+    private Boolean isBotMessage;
     private String mid;
     private MessageType msgType;
+    private String name;
     private String payLoad;
-    private Boolean isBotMessage;
+    private String photoUrl;
+    private String sid;
     private Boolean isMine;
     private Long ts;
 
@@ -72,6 +85,19 @@ public class FriendlyMessage {
         this.isBotMessage = isBotMessage;
         this.ts = (new Date()).getTime();
         this.isMine = isMine;
+    }
+
+    public String snippet() {
+        MessageType messageType = this.msgType;
+
+        switch (messageType) {
+            case Movie:
+                return Movie.getMovie(payLoad).snippet();
+            case TicTacToe:
+                return GameState.instanceFrom(payLoad).snippet();
+            default:
+                return payLoad;
+        }
     }
 
     public String getMid() {
@@ -142,7 +168,7 @@ public class FriendlyMessage {
         return msgType;
     }
 
-    public static String getGroupTitleForMessage(String messagePayload, String messageType) {
+    public static String getGroupTitleForMessage(String messagePayload) {
         String groupTitle = messagePayload;
         if (messagePayload == null) {
             return "Say Something !! Break the ICE";

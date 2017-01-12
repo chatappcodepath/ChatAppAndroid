@@ -169,7 +169,7 @@ public class FirebaseClient {
 
     public void updateGroupRefsAndSendNotifications(String groupID, FriendlyMessage messageToSend) {
         DatabaseReference groupReference = mFirebaseDatabaseReference.child(GROUPS_NODE).child(groupID);
-        groupReference.child("lmSnippet").setValue(messageToSend.getPayLoad());
+        groupReference.child("lmSnippet").setValue(messageToSend.snippet());
         groupReference.child("messageType").setValue(messageToSend.getMsgType());
         groupReference.child("ts").setValue(messageToSend.getTs());
         sendNotificationForGroup(groupID, messageToSend);
@@ -179,7 +179,7 @@ public class FirebaseClient {
         DatabaseReference notificationReferenceNode = mFirebaseDatabaseReference.child(NOTIFICATION_REQUEST_NODE);
         Map notification = new HashMap<>();
         notification.put("groupID", groupID);
-        notification.put("payload", message.getPayLoad());
+        notification.put("payload", message.snippet());
         notification.put("senderID", getmFirebaseUser().getUid());
         notification.put("title", getmFirebaseUser().getDisplayName());
         notificationReferenceNode.push().setValue(notification);

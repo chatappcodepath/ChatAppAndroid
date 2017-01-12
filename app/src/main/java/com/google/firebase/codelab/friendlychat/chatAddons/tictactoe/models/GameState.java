@@ -1,5 +1,7 @@
 package com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.models;
 
+import android.text.TextUtils;
+
 import com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeConstants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +35,19 @@ public class GameState {
         newGameState.populateSids();
         newGameState.populateCurrentTileState();
         return newGameState;
+    }
+
+    public String snippet() {
+        String retVal = "TicTacToe";
+        if (moves.size() > 0) {
+            ArrayList<String> movesString = new ArrayList<String>();
+            for ( GameMove move : moves) {
+                movesString.add(move.move + ":" + move.position);
+            }
+            retVal += ":" + TextUtils.join(",", movesString);
+        }
+
+        return retVal;
     }
 
     private void populateSids() {

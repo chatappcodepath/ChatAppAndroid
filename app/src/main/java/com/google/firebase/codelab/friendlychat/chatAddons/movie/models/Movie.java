@@ -30,6 +30,8 @@ public class Movie {
         return id;
     }
 
+    public String snippet() {return title; }
+
     public String getPoster_path() {
         return  String.format("https://image.tmdb.org/t/p/w500/%s", poster_path);
     }

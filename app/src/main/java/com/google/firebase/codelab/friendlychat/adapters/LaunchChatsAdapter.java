@@ -72,7 +72,7 @@ public class LaunchChatsAdapter extends RecyclerView.Adapter<LaunchChatsAdapter.
         String groupTitleString = currentGroup.getTitle().replace(currentUser.getDisplayName(), "");
         viewholder.tvChatContactName.setText(groupTitleString);
         viewholder.tvChatTimestamp.setText(currentGroup.getRelativeTimeStamp());
-        String groupLastMessage = FriendlyMessage.getGroupTitleForMessage(currentGroup.getLastMessageSnippet(), currentGroup.getMessageType());
+        String groupLastMessage = FriendlyMessage.getGroupTitleForMessage(currentGroup.getLastMessageSnippet());
         viewholder.tvChatLastComment.setText(groupLastMessage);
     }
 

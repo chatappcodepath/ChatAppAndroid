@@ -13,14 +13,23 @@ import java.util.Map;
 
 /**
  * Created by patelkev on 11/12/16.
- */
+ * /*
+ {
+ "id" : "-KWYv_n0af9nONROrfou",
+ "lmSnippet" : "how to do",
+ "title" : "Kevin PatelYqa phonereg",
+ "ts" : 1479784792596,
+ "usersImgs" : {
+ "8j0804sBAXOnaW0AYI6vPRpfSaI2" : "https://lh4.googleusercontent.com/-6v5FaHf_KOc/AAAAAAAAAAI/AAAAAAAAAAA/AKTaeK8xIk_DrmSpOgbk-P7pCYgGsbZHow/s96-c/photo.jpg",
+ "pvJwcq9LJ0Ww90Zab0Q081uBfdp1" : "https://lh6.googleusercontent.com/-cxMARBNR46g/AAAAAAAAAAI/AAAAAAAAALw/YJIFmViOKwE/s96-c/photo.jpg"
+ }
+ }*/
 
 public class Group {
+    String id;
     String lmSnippet;
-    String messageType;
     String title;
     Long ts;
-    String id;
     HashMap<String, String> usersImgs;
     @Exclude
     Date lastUpdatedDate;
@@ -122,11 +131,4 @@ public class Group {
         this.id = id;
     }
 
-    public String getMessageType() {
-        return messageType;
-    }
-
-    public void setMessageType(String messageType) {
-        this.messageType = messageType;
-    }
 }
