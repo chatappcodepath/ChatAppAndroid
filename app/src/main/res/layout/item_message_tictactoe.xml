@@ -20,17 +20,17 @@
             android:weightSum="3" android:layout_height="wrap_content" android:layout_marginLeft="10dip" android:layout_marginRight="10dip">
             <TableRow android:id="@+id/tableRow1" android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="1">
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:adjustViewBounds="true" android:scaleType="fitXY"
                     android:id="@+id/GameTile01" android:layout_height="wrap_content" myapp:row="0" myapp:col="0"
                     android:layout_weight="1" android:layout_width="fill_parent" android:src="@drawable/blank"/>
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_weight="1" android:scaleType="fitXY"
                     android:adjustViewBounds="true" android:id="@+id/GameTile02" android:layout_height="wrap_content"
                     myapp:row="0" myapp:col="1"
                     myapp:borderLeft="true" myapp:borderRight="true"
                     android:layout_width="fill_parent" android:src="@drawable/blank"/>
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:adjustViewBounds="true" android:scaleType="fitXY"
                     android:layout_weight="1" android:id="@+id/GameTile03"
                     myapp:row="0" myapp:col="2"
@@ -38,20 +38,20 @@
             </TableRow>
             <TableRow android:id="@+id/tableRow2" android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="1">
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_width="wrap_content" android:adjustViewBounds="true"
                     android:scaleType="fitXY" android:id="@+id/GameTile04"
                     myapp:borderTop="true" myapp:borderBottom="true"
                     myapp:row="1" myapp:col="0"
                     android:layout_height="wrap_content" android:layout_weight="1" android:src="@drawable/blank"/>
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_weight="1" android:scaleType="fitXY"
                     android:adjustViewBounds="true" myapp:borderTop="true" myapp:borderBottom="true"
                     myapp:borderLeft="true" myapp:borderRight="true"
                     myapp:row="1" myapp:col="1"
                     android:id="@+id/GameTile05" android:src="@drawable/blank"/>
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:adjustViewBounds="true" android:scaleType="fitXY"
                     android:layout_weight="1" myapp:borderTop="true" myapp:borderBottom="true"
@@ -60,18 +60,18 @@
             </TableRow>
             <TableRow android:id="@+id/tableRow3" android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:layout_weight="1">
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_weight="1" android:adjustViewBounds="true"
                     myapp:row="2" myapp:col="0"
                     android:scaleType="fitXY" android:id="@+id/GameTile07" android:src="@drawable/blank"/>
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:layout_weight="1" android:scaleType="fitXY"
                     android:adjustViewBounds="true" myapp:borderLeft="true" myapp:borderRight="true"
                     myapp:row="2" myapp:col="1"
                     android:id="@+id/GameTile08" android:src="@drawable/blank"/>
-                <com.google.firebase.codelab.friendlychat.chatAddons.tictactoe.TicTacToeTile
+                <com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeTile
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:adjustViewBounds="true" android:scaleType="fitXY"
                     android:layout_weight="1" myapp:row="2" myapp:col="2"

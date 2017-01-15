@@ -7,26 +7,26 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".utilities.ChatApplication"
+        android:name="com.lzchat.LZChat.utilities.ChatApplication"
         android:allowBackup="true"
         android:icon="@drawable/lz_bubbles"
         android:supportsRtl="true"
         android:label="LzChat"
         android:theme="@style/Theme.CHATAPP_THEME">
-        <activity android:name=".activities.IndividualChatActivity"/>
-        <activity android:name=".activities.SignInActivity">
+        <activity android:name="com.lzchat.LZChat.activities.IndividualChatActivity"/>
+        <activity android:name="com.lzchat.LZChat.activities.SignInActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
             <category android:name="android.intent.category.LAUNCHER"/>
         </intent-filter>
         </activity>
-        <activity android:name=".activities.ContactsListActivity"/>
-        <activity android:name=".activities.LaunchChatsActivity"/>
-        <activity android:name=".activities.TrailerGridViewActivity">
+        <activity android:name="com.lzchat.LZChat.activities.ContactsListActivity"/>
+        <activity android:name="com.lzchat.LZChat.activities.LaunchChatsActivity"/>
+        <activity android:name="com.lzchat.LZChat.activities.TrailerGridViewActivity">
         </activity>
 
         <service
-            android:name=".database.MyFirebaseMessagingService"
+            android:name="com.lzchat.LZChat.database.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -34,7 +34,7 @@
         </service>
 
         <service
-            android:name=".database.MyFirebaseInstanceIdService"
+            android:name="com.lzchat.LZChat.database.MyFirebaseInstanceIdService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />

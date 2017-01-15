@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/MyMaterialTheme"
-    tools:context="com.google.firebase.codelab.friendlychat.chatAddons.movie.fragments.MovieFragment">
+    tools:context="com.lzchat.LZChat.chatAddons.movie.fragments.MovieFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <include layout="@layout/activity_trailer_grid_view"
