@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.firebase.codelab.friendlychat.activities.IndividualChatActivity.INTENT_GROUP_KEY;
+import static com.google.firebase.codelab.friendlychat.activities.IndividualChatActivity.INTENT_GROUP_TITLE;
 import static com.google.firebase.codelab.friendlychat.utilities.FirebaseClient.USERS_NODE;
 
 /**
@@ -93,13 +94,13 @@ public class ContactsListActivity extends AppCompatActivity {
                     public void onContactClicked(User user) {
                         Log.d(TAG, "Clicked user " + user.getId());
                         List<User> users = new ArrayList<>();
-                        User currentUser = new User(ChatApplication.getFirebaseClient().getmFirebaseUser());
+                        final User currentUser = new User(ChatApplication.getFirebaseClient().getmFirebaseUser());
                         users.add(currentUser);
                         users.add(user);
                         ChatApplication.getFirebaseClient().createGroup(users, new FirebaseClient.FetchGroupsInterface() {
                             @Override
                             public void fetchedGroups(ArrayList<Group> groups) {
-                                finishActivityWithGroupID(groups.get(0).getId());
+                                finishActivityWithGroupID(groups.get(0).getId(), groups.get(0).getTitle().replace(currentUser.getName(), ""));
                             }
                         });
                     }
@@ -112,10 +113,11 @@ public class ContactsListActivity extends AppCompatActivity {
         rvContactList.setAdapter(mFirebaseAdapter);
     }
 
-    public void finishActivityWithGroupID(String groupID) {
+    public void finishActivityWithGroupID(String groupID, String groupTitle) {
         Intent data = new Intent();
         // Pass relevant data back as a result
         data.putExtra(INTENT_GROUP_KEY, groupID);
+        data.putExtra(INTENT_GROUP_TITLE, groupTitle);
         data.putExtra("code", 200); // ints work too
         // Activity finished ok, return the data
         setResult(RESULT_OK, data); // set result code and bundle data for response

@@ -150,6 +150,7 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
         if (requestCode == 200 && data != null) {
             Intent i = new Intent(this , IndividualChatActivity.class);
             i.putExtra(INTENT_GROUP_KEY, data.getStringExtra(INTENT_GROUP_KEY));
+            i.putExtra(INTENT_GROUP_TITLE, data.getStringExtra(INTENT_GROUP_TITLE));
             this.startActivity(i);
         }
     }

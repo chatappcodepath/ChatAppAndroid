@@ -186,6 +186,12 @@ public class FirebaseClient {
     }
 
     public void createGroup(final List<User> users, final FetchGroupsInterface mFetchGroupsInterface) {
+
+        if (this.groupIdsForCurrentUser.length == 0) {
+            createNewGroupInFirebase(users, mFetchGroupsInterface);
+            return;
+        }
+
         ArrayList<String> sortedList = new ArrayList<>();
         for (int i = 0; i < users.size(); i++) {
             sortedList.add(users.get(i).getId());
@@ -211,20 +217,25 @@ public class FirebaseClient {
                         return;
                     }
                 }
-                // existing group not found create a group
-                DatabaseReference groupsRef = mFirebaseDatabaseReference.child(GROUPS_NODE);
-                DatabaseReference newGroupsRef = groupsRef.push();
-                group = new Group(users, newGroupsRef.getKey());
-                newGroupsRef.setValue(group);
-                DatabaseReference groupsForUserRef = mFirebaseDatabaseReference.child(GROUPS_FOR_USER_NODE);
-                for (int i = 0; i < users.size(); i++) {
-                    groupsForUserRef.child(users.get(i).getId()).child(group.getId()).setValue(true);
-                }
-                ArrayList<Group> retGroups = new ArrayList<Group>();
-                retGroups.add(group);
-                mFetchGroupsInterface.fetchedGroups(retGroups);
+                createNewGroupInFirebase(users, mFetchGroupsInterface);
             }
         });
+    }
+
+    private void createNewGroupInFirebase(final List<User> users, final FetchGroupsInterface mFetchGroupsInterface) {
+        // existing group not found create a group
+        DatabaseReference groupsRef = mFirebaseDatabaseReference.child(GROUPS_NODE);
+        DatabaseReference newGroupsRef = groupsRef.push();
+        Group group = new Group(users, newGroupsRef.getKey());
+        newGroupsRef.setValue(group);
+        DatabaseReference groupsForUserRef = mFirebaseDatabaseReference.child(GROUPS_FOR_USER_NODE);
+        for (int i = 0; i < users.size(); i++) {
+            groupsForUserRef.child(users.get(i).getId()).child(group.getId()).setValue(true);
+        }
+
+        ArrayList<Group> retGroups = new ArrayList<Group>();
+        retGroups.add(group);
+        mFetchGroupsInterface.fetchedGroups(retGroups);
     }
 
     public void removePushToken(String token) {
