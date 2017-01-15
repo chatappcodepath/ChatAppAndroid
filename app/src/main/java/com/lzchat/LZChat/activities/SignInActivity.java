@@ -39,7 +39,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.lzchat.firebase.codelab.friendlychat.R;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.utilities.ChatApplication;
 import com.lzchat.LZChat.utilities.FirebaseClient;
 

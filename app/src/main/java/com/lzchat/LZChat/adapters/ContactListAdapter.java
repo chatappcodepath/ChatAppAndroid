@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.models.User;
 
 import java.util.List;
@@ -36,9 +37,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivProfileImage = (ImageView) itemView.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.ivProfileImageContacts);
-            tvUsername = (TextView) itemView.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.tvNameContacts);
-            tvEmail = (TextView) itemView.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.tvEmailContacts);
+            ivProfileImage = (ImageView) itemView.findViewById(R.id.ivProfileImageContacts);
+            tvUsername = (TextView) itemView.findViewById(R.id.tvNameContacts);
+            tvEmail = (TextView) itemView.findViewById(R.id.tvEmailContacts);
             itemView.setOnClickListener(this);
         }
 
@@ -50,7 +51,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     @Override
     public ContactListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View contactView = LayoutInflater.from(parent.getContext()).inflate(com.lzchat.firebase.codelab.friendlychat.R.layout.item_contact, parent, false);
+        View contactView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_contact, parent, false);
         ViewHolder viewHolder = new ViewHolder(contactView);
         return viewHolder;
     }
@@ -58,7 +59,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public void onBindViewHolder(ContactListAdapter.ViewHolder viewholder, int position) {
         //Glide.with(mContext).load(R.drawable.ic_account_circle_black_36dp).into(viewholder.ivProfileImage);
-        viewholder.ivProfileImage.setImageDrawable(ContextCompat.getDrawable(getContext(), com.lzchat.firebase.codelab.friendlychat.R.drawable.ic_vector_account));
+        viewholder.ivProfileImage.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_vector_account));
         viewholder.tvUsername.setText(myUsers.get(position).getName());
         viewholder.tvEmail.setText(myUsers.get(position).getEmail());
     }

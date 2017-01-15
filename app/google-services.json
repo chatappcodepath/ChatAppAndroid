@@ -40,15 +40,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "555626995561-hg62965l2tl6r2tjeo8svmo54aoutsi8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "555626995561-0o3mp2d30k4krfuk3pm5nlt9a1d79qih.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.lzchat.LZChat"
               }
-            },
-            {
-              "client_id": "555626995561-hg62965l2tl6r2tjeo8svmo54aoutsi8.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },
@@ -91,15 +91,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "555626995561-hg62965l2tl6r2tjeo8svmo54aoutsi8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "555626995561-0o3mp2d30k4krfuk3pm5nlt9a1d79qih.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.lzchat.LZChat"
               }
-            },
-            {
-              "client_id": "555626995561-hg62965l2tl6r2tjeo8svmo54aoutsi8.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },
