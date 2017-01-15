@@ -29,11 +29,12 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.crash.FirebaseCrash;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.adapters.LaunchChatsAdapter;
 import com.lzchat.LZChat.models.Group;
 import com.lzchat.LZChat.utilities.ChatApplication;
 import com.lzchat.LZChat.utilities.FirebaseClient;
-import com.google.firebase.crash.FirebaseCrash;
 
 import java.util.ArrayList;
 
@@ -58,16 +59,16 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
         super.onCreate(savedInstanceState);
 
         // inflate transition XML & set exit transition
-        Transition transition = TransitionInflater.from(this).inflateTransition(com.lzchat.firebase.codelab.friendlychat.R.transition.slide_right);
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.slide_right);
         getWindow().setExitTransition(transition);
-        setContentView(com.lzchat.firebase.codelab.friendlychat.R.layout.activity_launch_chats);
+        setContentView(R.layout.activity_launch_chats);
 
-        Toolbar toolbar = (Toolbar) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         final String currentUserName = ChatApplication.getFirebaseClient().getmFirebaseUser().getDisplayName();
-        TextView mTitle = (TextView) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.toolbar_title);
+        TextView mTitle = (TextView) findViewById(R.id.toolbar_title);
         // Create the TypeFace from the TTF asset
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
         mTitle.setText("Hello " + currentUserName);
@@ -80,14 +81,14 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
                 Intent i = new Intent(context , IndividualChatActivity.class);
                 i.putExtra(INTENT_GROUP_KEY, selectedGroup.getId());
                 i.putExtra(INTENT_GROUP_TITLE, selectedGroup.getTitle().replace(currentUserName, ""));
-                TextView tvName = (TextView) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.tvNameChat);
-                String transitionStr = getString(com.lzchat.firebase.codelab.friendlychat.R.string.firstlastname);
+                TextView tvName = (TextView) findViewById(R.id.tvNameChat);
+                String transitionStr = getString(R.string.firstlastname);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation((Activity) context, (View)tvName, transitionStr );
                 context.startActivity(i,options.toBundle());
             }
         });
-        RecyclerView rvChatList = (RecyclerView) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.rvChats);
+        RecyclerView rvChatList = (RecyclerView) findViewById(R.id.rvChats);
         rvChatList.setAdapter(mGroupsAdapter);
         rvChatList.setLayoutManager(new LinearLayoutManager(this));
 
@@ -104,13 +105,13 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
     public boolean onCreateOptionsMenu(Menu menu) {
         FirebaseCrash.log("OnCreateOptionsMenu");
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(com.lzchat.firebase.codelab.friendlychat.R.menu.main_menu, menu);
+        inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case com.lzchat.firebase.codelab.friendlychat.R.id.sign_out_menu:
+            case R.id.sign_out_menu:
                 ChatApplication.removeCurrentPushToken();
                 mFirebaseAuth.signOut();
 
@@ -155,14 +156,14 @@ public class LaunchChatsActivity extends AppCompatActivity implements GoogleApiC
     }
 
     private void setFAB(){
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.fab);
-        fab.setImageDrawable(ContextCompat.getDrawable(this, com.lzchat.firebase.codelab.friendlychat.R.drawable.ic_vector_addchat));
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_vector_addchat));
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(LaunchChatsActivity.this, ContactsListActivity.class);
-                String transitionStr = getString(com.lzchat.firebase.codelab.friendlychat.R.string.firstlastname);
+                String transitionStr = getString(R.string.firstlastname);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation(LaunchChatsActivity.this, (View)fab, transitionStr);
                 startActivityForResult(i, 200, options.toBundle());

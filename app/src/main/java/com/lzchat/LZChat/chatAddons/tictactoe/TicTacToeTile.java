@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.lzchat.LZChat.R;
+
 /**
  * Created by patelkev on 11/25/16.
  */
@@ -44,24 +46,24 @@ public class TicTacToeTile extends ImageView implements TicTacToeDrawable {
         super(context, attrs);
 
         // Get the border information
-        TypedArray a = context.obtainStyledAttributes(attrs, com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile, 0,0);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.TicTacToeTile, 0,0);
 
         mBorderLeft = a.getBoolean(
-                com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile_borderLeft,
+                R.styleable.TicTacToeTile_borderLeft,
                 false);
         mBorderRight = a.getBoolean(
-                com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile_borderRight,
+                R.styleable.TicTacToeTile_borderRight,
                 false);
         mBorderTop = a.getBoolean(
-                com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile_borderTop,
+                R.styleable.TicTacToeTile_borderTop,
                 false);
         mBorderBottom = a.getBoolean(
-                com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile_borderBottom,
+                R.styleable.TicTacToeTile_borderBottom,
                 false);
 
         // Get the row and column information
-        mRow = a.getInteger(com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile_row, 0);
-        mCol = a.getInteger(com.lzchat.firebase.codelab.friendlychat.R.styleable.TicTacToeTile_col, 0);
+        mRow = a.getInteger(R.styleable.TicTacToeTile_row, 0);
+        mCol = a.getInteger(R.styleable.TicTacToeTile_col, 0);
 
         initTile();
     }

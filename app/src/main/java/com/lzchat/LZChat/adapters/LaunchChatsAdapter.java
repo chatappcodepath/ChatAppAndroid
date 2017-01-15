@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseUser;
-import com.lzchat.firebase.codelab.friendlychat.R;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.models.FriendlyMessage;
 import com.lzchat.LZChat.models.Group;
 import com.lzchat.LZChat.utilities.ChatApplication;

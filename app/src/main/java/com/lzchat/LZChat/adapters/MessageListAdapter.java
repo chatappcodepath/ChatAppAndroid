@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.Query;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.chatAddons.MessageViewHolder;
 import com.lzchat.LZChat.chatAddons.SentinelMessageViewHolder;
 import com.lzchat.LZChat.chatAddons.TextMessageViewHolder;
@@ -12,7 +14,6 @@ import com.lzchat.LZChat.chatAddons.movie.MovieMessageViewHolder;
 import com.lzchat.LZChat.chatAddons.tictactoe.TicTacToeMessageViewHolder;
 import com.lzchat.LZChat.models.FriendlyMessage;
 import com.lzchat.LZChat.utilities.ChatApplication;
-import com.google.firebase.database.Query;
 
 /**
  * Created by patelkev on 11/19/16.
@@ -26,7 +27,7 @@ public class MessageListAdapter extends FirebaseRecyclerAdapter<FriendlyMessage,
     private String gid;
 
     public MessageListAdapter(Query ref, Context activityContext, String gid) {
-        super(FriendlyMessage.class, com.lzchat.firebase.codelab.friendlychat.R.layout.item_message_text, MessageViewHolder.class, ref);
+        super(FriendlyMessage.class, R.layout.item_message_text, MessageViewHolder.class, ref);
         this.activityContext = activityContext;
         this.gid = gid;
     }

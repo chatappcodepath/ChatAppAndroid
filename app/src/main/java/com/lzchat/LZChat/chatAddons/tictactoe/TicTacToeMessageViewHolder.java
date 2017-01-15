@@ -12,7 +12,7 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.lzchat.firebase.codelab.friendlychat.R;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.chatAddons.MessageViewHolder;
 import com.lzchat.LZChat.chatAddons.tictactoe.models.GameMove;
 import com.lzchat.LZChat.chatAddons.tictactoe.models.GameState;

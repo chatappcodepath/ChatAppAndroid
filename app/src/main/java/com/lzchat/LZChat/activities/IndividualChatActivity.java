@@ -44,6 +44,11 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.crash.FirebaseCrash;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.adapters.MessageListAdapter;
 import com.lzchat.LZChat.adapters.ViewPagerAdapter;
 import com.lzchat.LZChat.chatAddons.MessageViewHolder;
@@ -56,10 +61,6 @@ import com.lzchat.LZChat.models.FriendlyMessage;
 import com.lzchat.LZChat.utilities.AddonsProtocols;
 import com.lzchat.LZChat.utilities.ChatApplication;
 import com.lzchat.LZChat.utilities.CodelabPreferences;
-import com.google.firebase.crash.FirebaseCrash;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.lzchat.LZChat.utilities.FirebaseClient;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
@@ -100,9 +101,8 @@ public class IndividualChatActivity extends AppCompatActivity
     private ViewPager viewPager;
     private SlidingUpPanelLayout slidingLayout;
     private int[] tabIcons = {
-            com.lzchat.firebase.codelab.friendlychat.R.drawable.ic_movieslogo,
-            com.lzchat.firebase.codelab.friendlychat.R.drawable.ic_tictactoe,
-
+            R.drawable.ic_movieslogo,
+            R.drawable.ic_tictactoe,
     };
 
     // Firebase instance variables
@@ -116,15 +116,15 @@ public class IndividualChatActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.lzchat.firebase.codelab.friendlychat.R.layout.activity_individual_chat);
-        TextView mTitle = (TextView)findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.toolbar_title);
+        setContentView(R.layout.activity_individual_chat);
+        TextView mTitle = (TextView)findViewById(R.id.toolbar_title);
         Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Chantelli_Antiqua.ttf");
         mTitle.setTypeface(font);
 
         //view initialisation for movie fragment
-        linearLayout = (LinearLayout) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.linearLayout);
-        linearLayout_fragment = (LinearLayout) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.llFragment);
-        flMovieFragment = (FrameLayout) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.flMovieFragment) ;
+        linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        linearLayout_fragment = (LinearLayout) findViewById(R.id.llFragment);
+        flMovieFragment = (FrameLayout) findViewById(R.id.flMovieFragment) ;
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         FirebaseCrash.log("OnCreateMethod");
@@ -154,9 +154,9 @@ public class IndividualChatActivity extends AppCompatActivity
         };
 
         // Initialize ProgressBar and RecyclerView.
-        mProgressBar = (ProgressBar) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.progressBar);
+        mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mProgressBar.setVisibility(View.INVISIBLE);
-        mMessageRecyclerView = (RecyclerView) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.messageRecyclerView);
+        mMessageRecyclerView = (RecyclerView) findViewById(R.id.messageRecyclerView);
         mLinearLayoutManager = new LinearLayoutManager(this);
         mLinearLayoutManager.setStackFromEnd(true);
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
@@ -202,7 +202,7 @@ public class IndividualChatActivity extends AppCompatActivity
         mMessageRecyclerView.setLayoutManager(mLinearLayoutManager);
         mMessageRecyclerView.setAdapter(mFirebaseAdapter);
 
-        mMessageEditText = (EditText) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.messageEditText);
+        mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(mSharedPreferences
                 .getInt(CodelabPreferences.FRIENDLY_MSG_LENGTH, DEFAULT_MSG_LENGTH_LIMIT))});
         mMessageEditText.addTextChangedListener(new TextWatcher() {
@@ -214,10 +214,10 @@ public class IndividualChatActivity extends AppCompatActivity
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (charSequence.toString().trim().length() > 0) {
                     mSendButton.setEnabled(true);
-                    mSendButton.setImageDrawable(getDrawable(com.lzchat.firebase.codelab.friendlychat.R.drawable.ic_send_button1));
+                    mSendButton.setImageDrawable(getDrawable(R.drawable.ic_send_button1));
                 } else {
                     mSendButton.setEnabled(false);
-                    mSendButton.setImageDrawable(getDrawable(com.lzchat.firebase.codelab.friendlychat.R.drawable.ic_send_button));
+                    mSendButton.setImageDrawable(getDrawable(R.drawable.ic_send_button));
                 }
             }
 
@@ -239,7 +239,7 @@ public class IndividualChatActivity extends AppCompatActivity
             }
         });
 
-        mSendButton = (ImageButton) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.sendButton1);
+        mSendButton = (ImageButton) findViewById(R.id.sendButton1);
         mSendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -334,13 +334,13 @@ public class IndividualChatActivity extends AppCompatActivity
 
     private void setSlidingPanel() {
 
-        tabLayout = (TabLayout) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.tabs);
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setVisibility(VISIBLE);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
-        slidingLayout = (SlidingUpPanelLayout)findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.sliding_layout);
+        slidingLayout = (SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
         NestedScrollableViewHelper nsv = new NestedScrollableViewHelper();
-        nsv.setScrollableView(findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.gvTrailor));
+        nsv.setScrollableView(findViewById(R.id.gvTrailor));
         slidingLayout.setAnchorPoint(0.5f);
         slidingLayout.setPanelState(SlidingUpPanelLayout.PanelState.ANCHORED);
         slidingLayout.setFadeOnClickListener(new View.OnClickListener() {
@@ -399,10 +399,10 @@ public class IndividualChatActivity extends AppCompatActivity
     }
 
     private void setAddonView() {
-        AppBarLayout alAddon = (AppBarLayout) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.alAddon);
+        AppBarLayout alAddon = (AppBarLayout) findViewById(R.id.alAddon);
         alAddon.setVisibility(VISIBLE);
 
-        viewPager = (ViewPager) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
     }

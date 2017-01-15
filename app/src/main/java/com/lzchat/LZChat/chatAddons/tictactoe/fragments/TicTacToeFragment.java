@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.lzchat.LZChat.R;
+
 public class TicTacToeFragment extends Fragment{
 
     public interface TicTacToeFragmentListener {
@@ -43,8 +45,8 @@ public class TicTacToeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View mainView = inflater.inflate(com.lzchat.firebase.codelab.friendlychat.R.layout.fragment_tictactoe, container, false);
-        Button startGameButton = (Button) mainView.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.startGame);
+        View mainView = inflater.inflate(R.layout.fragment_tictactoe, container, false);
+        Button startGameButton = (Button) mainView.findViewById(R.id.startGame);
         startGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

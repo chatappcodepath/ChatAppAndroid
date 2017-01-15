@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.lzchat.firebase.codelab.friendlychat.R;
+import com.lzchat.LZChat.R;
 
 /**
  * A simple {@link Fragment} subclass.

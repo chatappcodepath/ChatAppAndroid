@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.models.FriendlyMessage;
 
 /**
@@ -13,7 +14,7 @@ import com.lzchat.LZChat.models.FriendlyMessage;
 
 public class SentinelMessageViewHolder extends MessageViewHolder {
 
-    public static int layoutID = com.lzchat.firebase.codelab.friendlychat.R.layout.item_message_sentinel;
+    public static int layoutID = R.layout.item_message_sentinel;
 
     public SentinelMessageViewHolder(View itemView, Context activityContext) {
         super(itemView, activityContext);

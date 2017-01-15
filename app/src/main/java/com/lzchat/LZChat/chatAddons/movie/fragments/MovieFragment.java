@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.chatAddons.movie.MovieNetworkClient;
 import com.lzchat.LZChat.chatAddons.movie.adapter.TrailerGridAdapter;
 import com.lzchat.LZChat.chatAddons.movie.listeners.EndlessScrollListener;
@@ -84,7 +85,7 @@ public class MovieFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View view = inflater.inflate(com.lzchat.firebase.codelab.friendlychat.R.layout.fragment_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
 
         displayListView(view);
         return view;
@@ -122,9 +123,9 @@ public class MovieFragment extends Fragment {
 
     private void displayListView(View view) {
 
-        mGridView = (GridView) view.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.gvTrailor);
+        mGridView = (GridView) view.findViewById(R.id.gvTrailor);
         mGridData = new ArrayList<>();
-        mTrailerGridAdapter = new TrailerGridAdapter(getActivity(), com.lzchat.firebase.codelab.friendlychat.R.layout.trailer_poster_item, mGridData);
+        mTrailerGridAdapter = new TrailerGridAdapter(getActivity(), R.layout.trailer_poster_item, mGridData);
 
         mGridView.setAdapter(mTrailerGridAdapter);
         getMovieDetails(1);

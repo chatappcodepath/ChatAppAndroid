@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.google.firebase.codelab.friendlychat">
+          package="com.lzchat.LZChat">
     <uses-sdk android:minSdkVersion="21"/>
     <uses-permission android:name="android.permission.INTERNET"
         />
@@ -11,7 +11,7 @@
         android:allowBackup="true"
         android:icon="@drawable/lz_bubbles"
         android:supportsRtl="true"
-        android:label="LzChat"
+        android:label="LZChat"
         android:theme="@style/Theme.CHATAPP_THEME">
         <activity android:name="com.lzchat.LZChat.activities.IndividualChatActivity"/>
         <activity android:name="com.lzchat.LZChat.activities.SignInActivity">

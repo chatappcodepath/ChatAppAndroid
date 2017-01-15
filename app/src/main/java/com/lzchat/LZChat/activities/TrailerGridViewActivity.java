@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.chatAddons.movie.MovieNetworkClient;
 import com.lzchat.LZChat.chatAddons.movie.adapter.TrailerGridAdapter;
 import com.lzchat.LZChat.chatAddons.movie.models.Movie;
@@ -26,12 +27,12 @@ public class TrailerGridViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(com.lzchat.firebase.codelab.friendlychat.R.layout.activity_trailer_grid_view);
+        setContentView(R.layout.activity_trailer_grid_view);
         //show the list of movies->call api,show in grid view
-        mGridView = (GridView) findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.gvTrailor);
+        mGridView = (GridView) findViewById(R.id.gvTrailor);
         //mTrailerProgressBar = (ProgressBar) findViewById(R.id.pbTrailor);
         mGridData = new ArrayList<>();
-        mTrailerGridAdapter = new TrailerGridAdapter(this, com.lzchat.firebase.codelab.friendlychat.R.layout.trailer_poster_item, mGridData);
+        mTrailerGridAdapter = new TrailerGridAdapter(this, R.layout.trailer_poster_item, mGridData);
 
         mGridView.setAdapter(mTrailerGridAdapter);
         getMovieDetails(1);

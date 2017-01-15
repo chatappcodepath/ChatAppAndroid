@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.lzchat.LZChat.R;
 import com.lzchat.LZChat.chatAddons.movie.models.Movie;
 
 import java.util.ArrayList;
@@ -49,8 +50,8 @@ public class TrailerGridAdapter extends ArrayAdapter<Movie> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             row = inflater.inflate(layoutResourceId, parent, false);
             holder = new ViewHolder();
-            holder.titleTextView = (TextView) row.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.tvTrailerTitle);
-            holder.imageView = (ImageView) row.findViewById(com.lzchat.firebase.codelab.friendlychat.R.id.ivTrailerImage);
+            holder.titleTextView = (TextView) row.findViewById(R.id.tvTrailerTitle);
+            holder.imageView = (ImageView) row.findViewById(R.id.ivTrailerImage);
             row.setTag(holder);
         } else {
             holder = (ViewHolder) row.getTag();
