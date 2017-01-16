@@ -70,6 +70,7 @@ public class LaunchChatsAdapter extends RecyclerView.Adapter<LaunchChatsAdapter.
         viewholder.selectedGroup = currentGroup;
         Glide.with(mContext).load(currentGroup.getImageUrl(currentUserID)).into(viewholder.civProfileImage);
         String groupTitleString = currentGroup.getTitle().replace(currentUser.getDisplayName(), "");
+        if (groupTitleString == "") { groupTitleString = "Selfie Chat";}
         viewholder.tvChatContactName.setText(groupTitleString);
         viewholder.tvChatTimestamp.setText(currentGroup.getRelativeTimeStamp());
         String groupLastMessage = FriendlyMessage.getGroupTitleForMessage(currentGroup.getLastMessageSnippet());

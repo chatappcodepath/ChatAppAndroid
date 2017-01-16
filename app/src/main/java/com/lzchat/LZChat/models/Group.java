@@ -61,14 +61,18 @@ public class Group {
 
     public String getImageUrl(String currentUserID) {
         Iterator it = usersImgs.entrySet().iterator();
+        String retURL = null;
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
-            if (pair.getKey() != currentUserID) {
+            if (retURL == null) {
+                retURL = (String) pair.getValue();
+            }
+            if (!pair.getKey().equals(currentUserID)) {
                 return (String) pair.getValue();
             }
             it.remove();
         }
-        return "";
+        return retURL;
     }
 
     @Exclude

@@ -28,6 +28,7 @@
     <string name="timestamp">Timestamp</string>
     <string name="lastcomment">You: Last chat comment by you</string>
     <string name="poster_image">poster Image</string>
+    <string name="tmdb_attribution_text">This product uses the TMDb API but is not endorsed or certified by TMDb.</string>
 
     <!--addonview -->
     <string-array name="listArray">
